@@ -37,8 +37,16 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.value.email,
       mdp: this.registerForm.value.mdp,
       role: this.registerForm.value.role
+    }).subscribe({
+      next: (response) => {
+        console.log('Utilisateur créé avec succès:', response);
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Erreur lors de la création:', error);
+        alert('Erreur lors de la création du compte');
+      }
     });
-    this.router.navigate(['/login']);
   }
 
   private checkPasswords(formGroup: FormGroup) {
