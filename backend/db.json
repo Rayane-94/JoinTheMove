@@ -1,0 +1,13 @@
+{
+  "utilisateurs": [
+    {
+      "id": 1,
+      "nom": "Rayane",
+      "prenom": "Besrour",
+      "email": "rayane@gmail.com",
+      "mdp": "rayane123",
+      "role": "admin"
+    }
+  ],
+  "seances": []
+}
