@@ -1,1 +1,14 @@
-<p>event works!</p>
+<section>
+  <h2>Événements</h2>
+
+  <ul>
+	<li *ngFor="let ev of events">
+	  <strong>{{ ev.title }}</strong> — {{ ev.date | date:'short' }} — {{ ev.lieu }}
+	  <div>{{ ev.description }}</div>
+	</li>
+  </ul>
+
+  <a routerLink="/evenements/creer">Créer un événement</a>
+
+  <router-outlet></router-outlet>
+</section>
