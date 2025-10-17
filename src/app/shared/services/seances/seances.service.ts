@@ -22,4 +22,8 @@ export class SeancesService {
   recupererSeances(): Observable<Seance[]> {
     return this.http.get<Seance[]>('http://localhost:3000/seances');
   }
+
+  recupererUneSeance(id: number): Observable<Seance> {
+    return this.http.get<Seance>(`http://localhost:3000/seances/${id}`);
+  }
 }
