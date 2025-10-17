@@ -1,0 +1,6 @@
+/* Le composant racine ne doit pas avoir de styles spécifiques */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
