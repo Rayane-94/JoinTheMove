@@ -9,5 +9,26 @@
       "role": "admin"
     }
   ],
-  "seances": []
+  "seances": [
+    {
+      "id": 1,
+      "label": "Séance de musculation - Upper Body",
+      "dateCreation": "2025-10-17T09:00:00.000Z",
+      "lieu": "Salle de sport - Zone Musculation",
+      "description": "Séance complète pour le haut du corps : pectoraux, dos, épaules et bras. Parfait pour développer la force et la masse musculaire du upper body.",
+      "idUtilisateur": null,
+      "exercice": null,
+      "categorie": null
+    },
+    {
+      "id": 2,
+      "label": "Course à pied - Endurance",
+      "dateCreation": "2025-10-17T18:30:00.000Z",
+      "lieu": "Parc de la Tête d'Or",
+      "description": "Séance de running axée sur l'endurance fondamentale. Course de 45 minutes à allure modérée pour améliorer la capacité cardiovasculaire.",
+      "idUtilisateur": null,
+      "exercice": null,
+      "categorie": null
+    }
+  ]
 }
