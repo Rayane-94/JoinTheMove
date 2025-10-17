@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 // Angular Material Modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,14 +16,27 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './seances/dashboard/dashboard.component';
+import { routes } from './app.routes';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './login/login/login.component';
+import { DashboardComponent as SeancesDashboardComponent } from './seances/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    DashboardComponent,
+    SeancesDashboardComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
     AppRoutingModule,
     // Angular Material Modules
     MatToolbarModule,
@@ -29,6 +45,9 @@ import { DashboardComponent } from './seances/dashboard/dashboard.component';
     MatIconModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent],
