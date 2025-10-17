@@ -6,7 +6,6 @@ export interface Seance {
   id: number;
   label: string;
   dateCreation: Date;
-  lieu: string;
   description: string;
   idUtilisateur: number | null;
   exercice: any | null;
@@ -23,7 +22,11 @@ export class SeancesService {
     return this.http.get<Seance[]>('http://localhost:3000/seances');
   }
 
-  recupererUneSeance(id: number): Observable<Seance> {
+  recupererUneSeanceParId(id: number): Observable<Seance> {
     return this.http.get<Seance>(`http://localhost:3000/seances/${id}`);
+  }
+
+  ajouterSeance(seance: Seance): Observable<Seance> {
+    return this.http.post<Seance>('http://localhost:3000/seances', seance);
   }
 }
