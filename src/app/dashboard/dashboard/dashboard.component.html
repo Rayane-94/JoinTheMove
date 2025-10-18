@@ -5,11 +5,11 @@
       <h1 class="logo">JoinTheMove</h1>
     </div>
     <nav class="sidebar-nav">
-      <a href="#" class="nav-item active">
+      <a href="#" class="nav-item" (click)="redirectTo($event, '/dashboard')">
         <span class="icon">📊</span>
         <span>Dashboard</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" (click)="redirectTo($event, '/seances')">
         <span class="icon">🏋️</span>
         <span>Séances</span>
       </a>
@@ -27,7 +27,7 @@
       </a>
     </nav>
     <div class="sidebar-footer">
-      <a href="#" class="nav-item">
+      <a href="#" class="nav-item" (click)="onLogout($event)">
         <span class="icon">🚪</span>
         <span>Déconnexion</span>
       </a>
