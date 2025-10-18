@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-import { DashboardComponent as SeancesDashboardComponent } from './seances/dashboard/dashboard.component';
+import { SeancesDashboardComponent } from './seances/dashboard/dashboardSeances.component';
 
 export const routes: Routes = [
 { 
