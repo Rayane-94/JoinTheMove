@@ -4,6 +4,7 @@ import{ DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { SeancesDashboardComponent } from './seances/dashboard/dashboardSeances.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { guardGuard } from './auth/guard.guard';
 
 const routes: Routes = [
   {
@@ -13,10 +14,12 @@ const routes: Routes = [
   {
     path: 'seances',
     component: SeancesDashboardComponent,
+    canActivate: [guardGuard], 
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [guardGuard], 
   },
   {
     path: 'login',
