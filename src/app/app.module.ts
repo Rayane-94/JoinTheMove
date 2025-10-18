@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './login/login/login.component';
-import { DashboardComponent as SeancesDashboardComponent } from './seances/dashboard/dashboard.component';
+import { SeancesDashboardComponent } from './seances/dashboard/dashboardSeances.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 @NgModule({

@@ -6,12 +6,12 @@ import {
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  selector: 'app-seances-dashboard',
+  templateUrl: './dashboardSeances.component.html',
+  styleUrl: './dashboardSeances.component.css',
   standalone: false,
 })
-export class DashboardComponent implements OnInit {
+export class SeancesDashboardComponent implements OnInit {
   seances: Seance[] = [];
   seancesAffichees: Seance[] = [];
   isLoading = true;
