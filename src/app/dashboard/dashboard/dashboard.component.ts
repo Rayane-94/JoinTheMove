@@ -16,10 +16,4 @@ export class DashboardComponent {
     event.preventDefault();
     this.router.navigate([route]);
   }
-
-  onLogout(event: Event): void {
-    event.preventDefault();
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
 }
