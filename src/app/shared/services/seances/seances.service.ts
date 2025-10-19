@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
+import { CategorieService, Categorie } from '../categories/categories.service';
 
 export interface Seance {
   id: number;
@@ -9,17 +10,40 @@ export interface Seance {
   description: string;
   idUtilisateur: number | null;
   exercice: any | null;
-  categorie: any | null;
+  idCategorie: number | null;
+}
+
+export interface SeanceAvecCategorie extends Seance {
+  categorieLabel?: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeancesService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private categorieService: CategorieService
+  ) {}
 
   recupererSeances(): Observable<Seance[]> {
     return this.http.get<Seance[]>('http://localhost:3000/seances');
+  }
+
+  recupererSeancesAvecCategories(): Observable<SeanceAvecCategorie[]> {
+    return forkJoin({
+      seances: this.recupererSeances(),
+      categories: this.categorieService.recupererCategories()
+    }).pipe(
+      map(({ seances, categories }) => {
+        return seances.map(seance => ({
+          ...seance,
+          categorieLabel: seance.idCategorie 
+            ? categories.find(cat => cat.id === seance.idCategorie)?.label 
+            : undefined
+        }));
+      })
+    );
   }
 
   recupererUneSeanceParId(id: number): Observable<Seance> {

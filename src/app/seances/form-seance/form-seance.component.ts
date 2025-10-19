@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SeancesService, Seance } from '../../shared/services/seances/seances.service';
+import {
+  SeancesService,
+  Seance,
+} from '../../shared/services/seances/seances.service';
 
 @Component({
   selector: 'app-form-seance',
@@ -23,7 +26,7 @@ export class FormSeanceComponent {
     this.seanceForm = this.fb.group({
       label: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      dateCreation: ['', [Validators.required]]
+      dateCreation: ['', [Validators.required]],
     });
   }
 
@@ -40,7 +43,7 @@ export class FormSeanceComponent {
         dateCreation: new Date(formValue.dateCreation),
         idUtilisateur: null,
         exercice: null,
-        categorie: null
+        idCategorie: null,
       };
 
       this.seancesService.ajouterSeance(nouvelleSeance as Seance).subscribe({
@@ -55,7 +58,7 @@ export class FormSeanceComponent {
           this.isLoading = false;
           this.errorMessage = 'Erreur lors de la création de la séance';
           console.error('Erreur:', error);
-        }
+        },
       });
     } else {
       this.markFormGroupTouched();
@@ -63,7 +66,7 @@ export class FormSeanceComponent {
   }
 
   private markFormGroupTouched() {
-    Object.keys(this.seanceForm.controls).forEach(field => {
+    Object.keys(this.seanceForm.controls).forEach((field) => {
       const control = this.seanceForm.get(field);
       control?.markAsTouched({ onlySelf: true });
     });

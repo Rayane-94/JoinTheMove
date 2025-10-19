@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   SeancesService,
-  Seance,
+  SeanceAvecCategorie,
 } from '../../shared/services/seances/seances.service';
 import { PageEvent } from '@angular/material/paginator';
 import { formatDate, formatTemps } from '../../shared/utils/date';
@@ -13,12 +13,11 @@ import { formatDate, formatTemps } from '../../shared/utils/date';
   standalone: false,
 })
 export class SeancesDashboardComponent implements OnInit {
-  seances: Seance[] = [];
-  seancesAffichees: Seance[] = [];
+  seances: SeanceAvecCategorie[] = [];
+  seancesAffichees: SeanceAvecCategorie[] = [];
   isLoading = true;
   errorMessage = '';
 
-  // Pagination
   pageSize = 5;
   pageIndex = 0;
   totalSeances = 0;
@@ -32,7 +31,7 @@ export class SeancesDashboardComponent implements OnInit {
 
   chargerSeances() {
     this.isLoading = true;
-    this.seancesService.recupererSeances().subscribe({
+    this.seancesService.recupererSeancesAvecCategories().subscribe({
       next: (seances) => {
         this.seances = seances;
         this.totalSeances = seances.length;
@@ -59,19 +58,27 @@ export class SeancesDashboardComponent implements OnInit {
     this.seancesAffichees = this.seances.slice(startIndex, endIndex);
   }
 
-  getTypeIcon(label: string): string {
-    if (label.toLowerCase().includes('musculation')) return 'fitness_center';
-    if (label.toLowerCase().includes('course')) return 'directions_run';
-    if (label.toLowerCase().includes('yoga')) return 'self_improvement';
-    if (label.toLowerCase().includes('natation')) return 'pool';
+  getTypeIcon(categorieLabel: string | undefined): string {
+    if (!categorieLabel) return 'sports';
+
+    const categorie = categorieLabel.toLowerCase();
+    if (categorie.includes('musculation')) return 'fitness_center';
+    if (categorie.includes('course')) return 'directions_run';
+    if (categorie.includes('cardio')) return 'favorite';
+    if (categorie.includes('yoga')) return 'self_improvement';
+    if (categorie.includes('natation')) return 'pool';
     return 'sports';
   }
 
-  getTypeClass(label: string): string {
-    if (label.toLowerCase().includes('musculation')) return 'type-musculation';
-    if (label.toLowerCase().includes('course')) return 'type-cardio';
-    if (label.toLowerCase().includes('yoga')) return 'type-yoga';
-    if (label.toLowerCase().includes('natation')) return 'type-natation';
+  getTypeClass(categorieLabel: string | undefined): string {
+    if (!categorieLabel) return 'type-default';
+
+    const categorie = categorieLabel.toLowerCase();
+    if (categorie.includes('musculation')) return 'type-musculation';
+    if (categorie.includes('course')) return 'type-cardio';
+    if (categorie.includes('cardio')) return 'type-cardio';
+    if (categorie.includes('yoga')) return 'type-yoga';
+    if (categorie.includes('natation')) return 'type-natation';
     return 'type-default';
   }
 

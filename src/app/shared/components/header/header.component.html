@@ -1,0 +1,93 @@
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex items-center">
+        <!-- Logo -->
+        <div
+          class="flex-shrink-0 cursor-pointer"
+          (click)="navigateTo('/dashboard')"
+        >
+          <h1 class="text-xl font-bold text-gray-900">JoinTheMove</h1>
+        </div>
+        <!-- Navigation Links -->
+        <div class="hidden md:ml-8 md:flex md:space-x-8">
+          <a
+            (click)="navigateTo('/dashboard')"
+            [class]="
+              activeRoute === 'dashboard'
+                ? 'border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer'
+                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors cursor-pointer'
+            "
+          >
+            Dashboard
+          </a>
+          <a
+            (click)="navigateTo('/seances')"
+            [class]="
+              activeRoute === 'seances'
+                ? 'border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer'
+                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors cursor-pointer'
+            "
+          >
+            Séances
+          </a>
+          <a
+            href="#"
+            class="border-transparent text-gray-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-not-allowed"
+            title="Bientôt disponible"
+          >
+            Évènements
+          </a>
+          <a
+            href="#"
+            class="border-transparent text-gray-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-not-allowed"
+            title="Bientôt disponible"
+          >
+            Statistiques
+          </a>
+        </div>
+      </div>
+
+      <!-- Right side -->
+      <div class="flex items-center space-x-4">
+        <!-- User Menu -->
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium"
+          >
+            R
+          </div>
+          <span class="text-sm font-medium text-gray-700 hidden sm:block"
+            >Rayane</span
+          >
+        </div>
+
+        <!-- Logout Button -->
+        <button
+          (click)="onLogout()"
+          class="text-gray-500 hover:text-gray-700 transition-colors p-2 rounded-md hover:bg-gray-100"
+          title="Déconnexion"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu (à développer si nécessaire) -->
+  <div class="md:hidden">
+    <!-- Menu mobile collapsed par défaut -->
+  </div>
+</nav>

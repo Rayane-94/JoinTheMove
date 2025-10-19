@@ -1,0 +1,20 @@
+/* Header component styles */
+nav {
+  backdrop-filter: blur(8px);
+}
+
+/* Smooth transitions for navigation links */
+.nav-link {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 1.125rem;
+  }
+
+  .user-name {
+    display: none;
+  }
+}
