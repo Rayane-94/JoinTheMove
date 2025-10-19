@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import{ DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { SeancesDashboardComponent } from './seances/dashboard/dashboardSeances.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { guardGuard } from './auth/guard.guard';
+import { FormSeanceComponent } from './seances/form-seance/form-seance.component';
 
 const routes: Routes = [
   {
@@ -14,12 +15,12 @@ const routes: Routes = [
   {
     path: 'seances',
     component: SeancesDashboardComponent,
-    canActivate: [guardGuard], 
+    canActivate: [guardGuard],
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [guardGuard], 
+    canActivate: [guardGuard],
   },
   {
     path: 'login',
@@ -27,7 +28,11 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent ,
+    component: RegisterComponent,
+  },
+  {
+    path: 'seances/nouvelle',
+    component: FormSeanceComponent,
   },
 ];
 

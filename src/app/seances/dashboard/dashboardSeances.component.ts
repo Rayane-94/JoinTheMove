@@ -4,6 +4,7 @@ import {
   Seance,
 } from '../../shared/services/seances/seances.service';
 import { PageEvent } from '@angular/material/paginator';
+import { formatDate, formatTemps } from '../../shared/utils/date';
 
 @Component({
   selector: 'app-seances-dashboard',
@@ -58,21 +59,6 @@ export class SeancesDashboardComponent implements OnInit {
     this.seancesAffichees = this.seances.slice(startIndex, endIndex);
   }
 
-  formatDate(date: Date): string {
-    return new Date(date).toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
-  }
-
-  formatTime(date: Date): string {
-    return new Date(date).toLocaleTimeString('fr-FR', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  }
-
   getTypeIcon(label: string): string {
     if (label.toLowerCase().includes('musculation')) return 'fitness_center';
     if (label.toLowerCase().includes('course')) return 'directions_run';
@@ -92,5 +78,13 @@ export class SeancesDashboardComponent implements OnInit {
   getTruncatedDescription(description: string): string {
     if (description.length <= 60) return description;
     return description.substring(0, 60) + '...';
+  }
+
+  formatDate(date: string | Date): string {
+    return formatDate(new Date(date));
+  }
+
+  formatTemps(date: string | Date): string {
+    return formatTemps(new Date(date));
   }
 }
