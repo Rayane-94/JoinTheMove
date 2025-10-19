@@ -25,7 +25,7 @@
       "description": "Séance complète pour le haut du corps : pectoraux, dos, épaules et bras. Parfait pour développer la force et la masse musculaire du upper body.",
       "idUtilisateur": null,
       "exercice": null,
-      "categorie": null
+      "idCategorie": 1
     },
     {
       "id": 2,
@@ -34,7 +34,52 @@
       "description": "Séance de running axée sur l'endurance fondamentale. Course de 45 minutes à allure modérée pour améliorer la capacité cardiovasculaire.",
       "idUtilisateur": null,
       "exercice": null,
-      "categorie": null
+      "idCategorie": 3
+    },
+    {
+      "id": 3,
+      "label": "Séance jeudi",
+      "dateCreation": "2025-10-17T18:30:00.000Z",
+      "description": "",
+      "idUtilisateur": null,
+      "exercice": null,
+      "idCategorie": 4
+    },
+    {
+      "id": 4,
+      "label": "Séance mardi",
+      "dateCreation": "2025-10-17T18:30:00.000Z",
+      "description": "",
+      "idUtilisateur": null,
+      "exercice": null,
+      "idCategorie": null
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "label": "Musculation",
+      "estVisible": true
+    },
+    {
+      "id": 2,
+      "label": "Cardio",
+      "estVisible": true
+    },
+    {
+      "id": 3,
+      "label": "Course à pied",
+      "estVisible": true
+    },
+    {
+      "id": 4,
+      "label": "Yoga",
+      "estVisible": true
+    },
+    {
+      "id": 5,
+      "label": "Natation",
+      "estVisible": true
     }
   ]
 }

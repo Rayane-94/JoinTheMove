@@ -1,162 +1,171 @@
-<div class="min-h-screen bg-gray-50 p-6">
-  <!-- Header -->
-  <div class="mb-8">
-    <div class="flex items-center justify-between">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">Nouvelle Séance</h1>
-        <p class="text-gray-600 mt-1">
-          Créez une nouvelle séance d'entraînement
-        </p>
-      </div>
-      <button
-        (click)="onCancel()"
-        class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-sm"
-      >
-        <mat-icon class="mr-2">arrow_back</mat-icon>
-        Retour
-      </button>
-    </div>
-  </div>
+<div class="min-h-screen bg-gray-50">
+  <!-- Header Component -->
+  <app-header activeRoute="seances"></app-header>
 
-  <!-- Success Message -->
-  <div
-    *ngIf="successMessage"
-    class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6"
-  >
-    <div class="flex items-center">
-      <mat-icon class="text-green-500 mr-2">check_circle</mat-icon>
-      <span class="text-green-700">{{ successMessage }}</span>
-    </div>
-  </div>
-
-  <!-- Error Message -->
-  <div
-    *ngIf="errorMessage"
-    class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6"
-  >
-    <div class="flex items-center">
-      <mat-icon class="text-red-500 mr-2">error</mat-icon>
-      <span class="text-red-700">{{ errorMessage }}</span>
-    </div>
-  </div>
-
-  <!-- Form -->
-  <div
-    class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden"
-  >
-    <form
-      [formGroup]="seanceForm"
-      (ngSubmit)="onSubmit()"
-      class="p-6 space-y-6"
-    >
-      <!-- Label Field -->
-      <div>
-        <label for="label" class="block text-sm font-medium text-gray-700 mb-2">
-          Nom de la séance *
-        </label>
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Ex: Séance de musculation - Upper Body</mat-label>
-          <input
-            matInput
-            id="label"
-            formControlName="label"
-            placeholder="Entrez le nom de votre séance"
-          />
-          <mat-icon matSuffix>fitness_center</mat-icon>
-          <mat-error
-            *ngIf="
-              seanceForm.get('label')?.invalid &&
-              seanceForm.get('label')?.touched
-            "
-          >
-            {{ getFieldError("Label") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Date Field -->
-      <div>
-        <label
-          for="dateCreation"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          Date et heure *
-        </label>
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Sélectionnez la date et l'heure</mat-label>
-          <input
-            matInput
-            type="datetime-local"
-            id="dateCreation"
-            formControlName="dateCreation"
-          />
-          <mat-icon matSuffix>schedule</mat-icon>
-          <mat-error
-            *ngIf="
-              seanceForm.get('dateCreation')?.invalid &&
-              seanceForm.get('dateCreation')?.touched
-            "
-          >
-            {{ getFieldError("Date") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Description Field -->
-      <div>
-        <label
-          for="description"
-          class="block text-sm font-medium text-gray-700 mb-2"
-        >
-          Description *
-        </label>
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Décrivez votre séance</mat-label>
-          <textarea
-            matInput
-            id="description"
-            formControlName="description"
-            rows="4"
-            placeholder="Décrivez les exercices, objectifs, intensité..."
-          ></textarea>
-          <mat-icon matSuffix>description</mat-icon>
-          <mat-error
-            *ngIf="
-              seanceForm.get('description')?.invalid &&
-              seanceForm.get('description')?.touched
-            "
-          >
-            {{ getFieldError("Description") }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!-- Action Buttons -->
-      <div
-        class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200"
-      >
+  <!-- Main Content -->
+  <div class="p-6">
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">Nouvelle Séance</h1>
+          <p class="text-gray-600 mt-1">
+            Créez une nouvelle séance d'entraînement
+          </p>
+        </div>
         <button
-          type="button"
           (click)="onCancel()"
-          class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-          [disabled]="isLoading"
+          class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-sm"
         >
-          Annuler
-        </button>
-        <button
-          type="submit"
-          class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-          [disabled]="seanceForm.invalid || isLoading"
-        >
-          <mat-spinner
-            *ngIf="isLoading"
-            diameter="20"
-            class="mr-2"
-          ></mat-spinner>
-          <mat-icon *ngIf="!isLoading" class="mr-2">save</mat-icon>
-          {{ isLoading ? "Création..." : "Créer la séance" }}
+          <mat-icon class="mr-2">arrow_back</mat-icon>
+          Retour
         </button>
       </div>
-    </form>
+    </div>
+
+    <!-- Success Message -->
+    <div
+      *ngIf="successMessage"
+      class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6"
+    >
+      <div class="flex items-center">
+        <mat-icon class="text-green-500 mr-2">check_circle</mat-icon>
+        <span class="text-green-700">{{ successMessage }}</span>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div
+      *ngIf="errorMessage"
+      class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6"
+    >
+      <div class="flex items-center">
+        <mat-icon class="text-red-500 mr-2">error</mat-icon>
+        <span class="text-red-700">{{ errorMessage }}</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div
+      class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden"
+    >
+      <form
+        [formGroup]="seanceForm"
+        (ngSubmit)="onSubmit()"
+        class="p-6 space-y-6"
+      >
+        <!-- Label Field -->
+        <div>
+          <label
+            for="label"
+            class="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Nom de la séance *
+          </label>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Ex: Séance de musculation - Upper Body</mat-label>
+            <input
+              matInput
+              id="label"
+              formControlName="label"
+              placeholder="Entrez le nom de votre séance"
+            />
+            <mat-icon matSuffix>fitness_center</mat-icon>
+            <mat-error
+              *ngIf="
+                seanceForm.get('label')?.invalid &&
+                seanceForm.get('label')?.touched
+              "
+            >
+              {{ getFieldError("Label") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Date Field -->
+        <div>
+          <label
+            for="dateCreation"
+            class="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Date et heure *
+          </label>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Sélectionnez la date et l'heure</mat-label>
+            <input
+              matInput
+              type="datetime-local"
+              id="dateCreation"
+              formControlName="dateCreation"
+            />
+            <mat-icon matSuffix>schedule</mat-icon>
+            <mat-error
+              *ngIf="
+                seanceForm.get('dateCreation')?.invalid &&
+                seanceForm.get('dateCreation')?.touched
+              "
+            >
+              {{ getFieldError("Date") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Description Field -->
+        <div>
+          <label
+            for="description"
+            class="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Description *
+          </label>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Décrivez votre séance</mat-label>
+            <textarea
+              matInput
+              id="description"
+              formControlName="description"
+              rows="4"
+              placeholder="Décrivez les exercices, objectifs, intensité..."
+            ></textarea>
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-error
+              *ngIf="
+                seanceForm.get('description')?.invalid &&
+                seanceForm.get('description')?.touched
+              "
+            >
+              {{ getFieldError("Description") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Action Buttons -->
+        <div
+          class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200"
+        >
+          <button
+            type="button"
+            (click)="onCancel()"
+            class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            [disabled]="isLoading"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+            [disabled]="seanceForm.invalid || isLoading"
+          >
+            <mat-spinner
+              *ngIf="isLoading"
+              diameter="20"
+              class="mr-2"
+            ></mat-spinner>
+            <mat-icon *ngIf="!isLoading" class="mr-2">save</mat-icon>
+            {{ isLoading ? "Création..." : "Créer la séance" }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
