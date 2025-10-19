@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'seances/nouvelle',
     component: FormSeanceComponent,
   },
+  {
+    path: 'seances/nouvelle',
+    component: FormSeanceComponent,
+  },
 ];
 
 @NgModule({
