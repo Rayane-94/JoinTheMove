@@ -15,6 +15,14 @@
       "email": "rayanebesrour3@gmail.com",
       "mdp": "test",
       "role": "user"
+    },
+    {
+      "id": "9748",
+      "nom": "Manceau",
+      "prenom": "Arthur",
+      "email": "aa@aa.aa",
+      "mdp": "1234",
+      "role": "user"
     }
   ],
   "seances": [
