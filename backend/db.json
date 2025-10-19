@@ -31,7 +31,7 @@
       "label": "Séance de musculation - Upper Body",
       "dateCreation": "2025-10-17T09:00:00.000Z",
       "description": "Séance complète pour le haut du corps : pectoraux, dos, épaules et bras. Parfait pour développer la force et la masse musculaire du upper body.",
-      "idUtilisateur": null,
+      "idUtilisateur": 1,
       "exercice": null,
       "idCategorie": 1
     },
@@ -40,7 +40,7 @@
       "label": "Course à pied - Endurance",
       "dateCreation": "2025-10-17T18:30:00.000Z",
       "description": "Séance de running axée sur l'endurance fondamentale. Course de 45 minutes à allure modérée pour améliorer la capacité cardiovasculaire.",
-      "idUtilisateur": null,
+      "idUtilisateur": "1",
       "exercice": null,
       "idCategorie": 3
     },
@@ -49,18 +49,27 @@
       "label": "Séance jeudi",
       "dateCreation": "2025-10-17T18:30:00.000Z",
       "description": "",
-      "idUtilisateur": null,
+      "idUtilisateur": "e41d",
       "exercice": null,
       "idCategorie": 4
     },
     {
-      "id": 4,
-      "label": "Séance mardi",
-      "dateCreation": "2025-10-17T18:30:00.000Z",
-      "description": "",
-      "idUtilisateur": null,
+      "id": "6190",
+      "label": "Oui",
+      "description": "description",
+      "dateCreation": "2025-10-19T14:19:35.681Z",
+      "idUtilisateur": "9748",
       "exercice": null,
-      "idCategorie": null
+      "idCategorie": "4"
+    },
+    {
+      "id": "e1d0",
+      "label": "moi",
+      "description": "",
+      "dateCreation": "2025-10-19T14:21:20.346Z",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": 4
     }
   ],
   "categories": [

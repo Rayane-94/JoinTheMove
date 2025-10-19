@@ -3,6 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
+export interface User {
+  id: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
