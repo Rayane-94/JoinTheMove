@@ -31,14 +31,6 @@ export class FormSeanceComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-
-    const now = new Date();
-    const defaultDateTime = new Date(
-      now.getTime() - now.getTimezoneOffset() * 60000
-    )
-      .toISOString()
-      .slice(0, 16);
-
     this.seanceForm = this.fb.group({
       label: ['', [Validators.required, Validators.minLength(3)]],
       description: [''],
@@ -87,7 +79,7 @@ export class FormSeanceComponent implements OnInit {
         label: formValue.label,
         description: formValue.description,
         dateCreation: new Date(),
-        idUtilisateur: currentUser.id,
+        idUtilisateur: String(currentUser.id),
         exercice: null,
         idCategorie: parseInt(formValue.idCategorie),
       };

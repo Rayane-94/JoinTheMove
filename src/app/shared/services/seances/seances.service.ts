@@ -73,6 +73,11 @@ export class SeancesService {
   }
 
   ajouterSeance(seance: Seance): Observable<Seance> {
-    return this.http.post<Seance>('http://localhost:3000/seances', seance);
+    const seanceFormatted = {
+      ...seance,
+      idUtilisateur: typeof seance.idUtilisateur === 'string' ? seance.idUtilisateur : String(seance.idUtilisateur)
+    };
+    console.log('Séance formatée avant envoi:', seanceFormatted);
+    return this.http.post<Seance>('http://localhost:3000/seances', seanceFormatted);
   }
 }
