@@ -5,6 +5,7 @@ import {
 } from '../../shared/services/seances/seances.service';
 import { PageEvent } from '@angular/material/paginator';
 import { formatDate, formatTemps } from '../../shared/utils/date';
+import { AuthService, User } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-seances-dashboard',
@@ -23,27 +24,40 @@ export class SeancesDashboardComponent implements OnInit {
   totalSeances = 0;
   pageSizeOptions = [5, 10, 25];
 
-  constructor(private seancesService: SeancesService) {}
+  constructor(
+    private seancesService: SeancesService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.chargerSeances();
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser) {
+      this.errorMessage = 'Vous devez être connecté pour voir vos séances';
+      this.isLoading = false;
+      return;
+    }
+    this.chargerSeances(currentUser);
   }
 
-  chargerSeances() {
+  chargerSeances(utilisateur: User) {
     this.isLoading = true;
-    this.seancesService.recupererSeancesAvecCategories().subscribe({
-      next: (seances) => {
-        this.seances = seances;
-        this.totalSeances = seances.length;
-        this.updateSeancesAffichees();
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.errorMessage = 'Erreur lors du chargement des séances';
-        this.isLoading = false;
-        console.error('Erreur:', error);
-      },
-    });
+
+    this.seancesService
+      .recupererSeancesAvecCategoriesParUtilisateur(utilisateur.id)
+      .subscribe({
+        next: (seances) => {
+          console.log("Séances récupérées pour l'utilisateur:", seances);
+          this.seances = seances;
+          this.totalSeances = seances.length;
+          this.updateSeancesAffichees();
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.errorMessage = 'Erreur lors du chargement des séances';
+          this.isLoading = false;
+          console.error('Erreur:', error);
+        },
+      });
   }
 
   onPageChange(event: PageEvent) {

@@ -8,7 +8,7 @@ export interface Seance {
   label: string;
   dateCreation: Date;
   description: string;
-  idUtilisateur: number | null;
+  idUtilisateur: string | null;
   exercice: any | null;
   idCategorie: number | null;
 }
@@ -30,17 +30,39 @@ export class SeancesService {
     return this.http.get<Seance[]>('http://localhost:3000/seances');
   }
 
+  recupererSeancesParUtilisateur(idUtilisateur: string): Observable<Seance[]> {
+    return this.http.get<Seance[]>(`http://localhost:3000/seances?idUtilisateur=${idUtilisateur}`);
+  }
+
   recupererSeancesAvecCategories(): Observable<SeanceAvecCategorie[]> {
     return forkJoin({
       seances: this.recupererSeances(),
-      categories: this.categorieService.recupererCategories()
+      categories: this.categorieService.recupererCategories(),
     }).pipe(
       map(({ seances, categories }) => {
-        return seances.map(seance => ({
+        return seances.map((seance) => ({
           ...seance,
-          categorieLabel: seance.idCategorie 
-            ? categories.find(cat => cat.id === seance.idCategorie)?.label 
-            : undefined
+          categorieLabel: seance.idCategorie
+            ? categories.find((cat) => cat.id === seance.idCategorie)?.label
+            : undefined,
+        }));
+      })
+    );
+  }
+
+  recupererSeancesAvecCategoriesParUtilisateur(
+    id: string
+  ): Observable<SeanceAvecCategorie[]> {
+    return forkJoin({
+      seances: this.recupererSeancesParUtilisateur(id),
+      categories: this.categorieService.recupererCategories(),
+    }).pipe(
+      map(({ seances, categories }) => {
+        return seances.map((seance) => ({
+          ...seance,
+          categorieLabel: seance.idCategorie
+            ? categories.find((cat) => cat.id === seance.idCategorie)?.label
+            : undefined,
         }));
       })
     );
@@ -51,6 +73,11 @@ export class SeancesService {
   }
 
   ajouterSeance(seance: Seance): Observable<Seance> {
-    return this.http.post<Seance>('http://localhost:3000/seances', seance);
+    const seanceFormatted = {
+      ...seance,
+      idUtilisateur: typeof seance.idUtilisateur === 'string' ? seance.idUtilisateur : String(seance.idUtilisateur)
+    };
+    console.log('Séance formatée avant envoi:', seanceFormatted);
+    return this.http.post<Seance>('http://localhost:3000/seances', seanceFormatted);
   }
 }
