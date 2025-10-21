@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { guardGuard } from './shared/guards/guard.guard';
 import { FormSeanceComponent } from './seances/form-seance/form-seance.component';
-
+import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'seances/nouvelle',
     component: FormSeanceComponent,
+  },
+  {
+    path: 'seances/modifier/:id',
+    component: ModifierSeanceComponent,
   },
 ];
 
