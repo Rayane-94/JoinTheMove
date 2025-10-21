@@ -112,8 +112,6 @@ export class SeancesDashboardComponent implements OnInit {
   }
 
   editerSeance(seance: SeanceAvecCategorie) {
-    console.log(seance.id);
-    console.log(seance.idUtilisateur);
     this.router.navigate(['/seances/modifier', seance.id]);
   }
 }
