@@ -31,7 +31,9 @@ export class SeancesService {
   }
 
   recupererSeancesParUtilisateur(idUtilisateur: string): Observable<Seance[]> {
-    return this.http.get<Seance[]>(`http://localhost:3000/seances?idUtilisateur=${idUtilisateur}`);
+    return this.http.get<Seance[]>(
+      `http://localhost:3000/seances?idUtilisateur=${idUtilisateur}`
+    );
   }
 
   recupererSeancesAvecCategories(): Observable<SeanceAvecCategorie[]> {
@@ -75,9 +77,15 @@ export class SeancesService {
   ajouterSeance(seance: Seance): Observable<Seance> {
     const seanceFormatted = {
       ...seance,
-      idUtilisateur: typeof seance.idUtilisateur === 'string' ? seance.idUtilisateur : String(seance.idUtilisateur)
+      idUtilisateur:
+        typeof seance.idUtilisateur === 'string'
+          ? seance.idUtilisateur
+          : String(seance.idUtilisateur),
     };
     console.log('Séance formatée avant envoi:', seanceFormatted);
-    return this.http.post<Seance>('http://localhost:3000/seances', seanceFormatted);
+    return this.http.post<Seance>(
+      'http://localhost:3000/seances',
+      seanceFormatted
+    );
   }
 }
