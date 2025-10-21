@@ -4,7 +4,7 @@ import { Observable, forkJoin, map } from 'rxjs';
 import { CategorieService, Categorie } from '../categories/categories.service';
 
 export interface Seance {
-  id: number;
+  id: string;
   label: string;
   dateCreation: Date;
   description: string;
@@ -70,7 +70,7 @@ export class SeancesService {
     );
   }
 
-  recupererUneSeanceParId(id: number): Observable<Seance> {
+  recupererUneSeanceParId(id: string): Observable<Seance> {
     return this.http.get<Seance>(`http://localhost:3000/seances/${id}`);
   }
 
@@ -86,6 +86,13 @@ export class SeancesService {
     return this.http.post<Seance>(
       'http://localhost:3000/seances',
       seanceFormatted
+    );
+  }
+
+  modifierSeance(seance: Seance): Observable<Seance> {
+    return this.http.put<Seance>(
+      `http://localhost:3000/seances/${seance.id}`,
+      seance
     );
   }
 }

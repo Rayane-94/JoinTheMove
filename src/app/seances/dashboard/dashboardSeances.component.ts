@@ -6,6 +6,7 @@ import {
 import { PageEvent } from '@angular/material/paginator';
 import { formatDate, formatTemps } from '../../shared/utils/date';
 import { AuthService, User } from '../../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seances-dashboard',
@@ -26,7 +27,8 @@ export class SeancesDashboardComponent implements OnInit {
 
   constructor(
     private seancesService: SeancesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -107,5 +109,11 @@ export class SeancesDashboardComponent implements OnInit {
 
   formatTemps(date: string | Date): string {
     return formatTemps(new Date(date));
+  }
+
+  editerSeance(seance: SeanceAvecCategorie) {
+    console.log(seance.id);
+    console.log(seance.idUtilisateur);
+    this.router.navigate(['/seances/modifier', seance.id]);
   }
 }

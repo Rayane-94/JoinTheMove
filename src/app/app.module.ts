@@ -26,6 +26,7 @@ import { SeancesDashboardComponent } from './seances/dashboard/dashboardSeances.
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { FormSeanceComponent } from './seances/form-seance/form-seance.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
     SeancesDashboardComponent,
     FormSeanceComponent,
     HeaderComponent,
+    ModifierSeanceComponent,
   ],
   imports: [
     BrowserModule,
