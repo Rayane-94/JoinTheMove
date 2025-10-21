@@ -126,8 +126,6 @@ export class ModifierSeanceComponent implements OnInit {
         idCategorie: parseInt(formValue.idCategorie),
       };
 
-      console.log('Séance modifiée à envoyer:', seanceModifiee);
-
       this.seancesService.modifierSeance(seanceModifiee).subscribe({
         next: (seance) => {
           this.isLoading = false;

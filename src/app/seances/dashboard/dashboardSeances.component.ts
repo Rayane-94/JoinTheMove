@@ -48,7 +48,6 @@ export class SeancesDashboardComponent implements OnInit {
       .recupererSeancesAvecCategoriesParUtilisateur(utilisateur.id)
       .subscribe({
         next: (seances) => {
-          console.log("Séances récupérées pour l'utilisateur:", seances);
           this.seances = seances;
           this.totalSeances = seances.length;
           this.updateSeancesAffichees();
