@@ -70,31 +70,40 @@
       "idUtilisateur": "9748",
       "exercice": null,
       "idCategorie": 3
+    },
+    {
+      "id": "56e2",
+      "label": "fgjkzerhbguierbuiog",
+      "description": "fgngjerguyierg",
+      "dateCreation": "2025-10-21T13:09:43.653Z",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": 5
     }
   ],
   "categories": [
     {
-      "id": "1",
+      "id": 1,
       "label": "Musculation",
       "estVisible": true
     },
     {
-      "id": "2",
+      "id": 2,
       "label": "Cardio",
       "estVisible": true
     },
     {
-      "id": "3",
+      "id": 3,
       "label": "Course à pied",
       "estVisible": true
     },
     {
-      "id": "4",
+      "id": 4,
       "label": "Yoga",
       "estVisible": true
     },
     {
-      "id": "5",
+      "id": 5,
       "label": "Natation",
       "estVisible": true
     }
