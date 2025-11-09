@@ -27,6 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { FormSeanceComponent } from './seances/form-seance/form-seance.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-sean
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    ToastComponent,
   ],
   exports: [RouterModule],
   providers: [],

@@ -81,7 +81,7 @@ export class FormSeanceComponent implements OnInit {
         dateCreation: new Date(),
         idUtilisateur: String(currentUser.id),
         exercice: null,
-        idCategorie: parseInt(formValue.idCategorie),
+        idCategorie: formValue.idCategorie,
       };
 
       this.seancesService.ajouterSeance(nouvelleSeance as Seance).subscribe({
@@ -90,7 +90,7 @@ export class FormSeanceComponent implements OnInit {
           this.successMessage = 'Séance créée avec succès !';
           setTimeout(() => {
             this.router.navigate(['/seances']);
-          }, 2000);
+          }, 200);
         },
         error: (error) => {
           this.isLoading = false;

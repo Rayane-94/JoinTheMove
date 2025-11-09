@@ -69,7 +69,7 @@ export class AuthService {
     return false;
   }
 
-  private getSavedUserInfo(): Observable<any[]> {
+  getSavedUserInfo(): Observable<any[]> {
     const userId = this.getSavedUser();
     return this.http.get<any[]>(`${this.apiUrl}?id=${userId}`);
   }
@@ -84,6 +84,36 @@ export class AuthService {
 
   getUserLastName(): string {
     return this.user?.nom || '';
+  }
+
+  getCurrentUserAsync(): Observable<User | null> {
+    return new Observable((observer) => {
+      if (this.user) {
+        // Utilisateur déjà en mémoire
+        observer.next(this.user as User);
+        observer.complete();
+      } else if (this.getSavedUser()) {
+        // Récupérer l'utilisateur depuis le localStorage
+        this.getSavedUserInfo().subscribe({
+          next: (users: any) => {
+            if (users && users.length > 0) {
+              this.user = users[0];
+              observer.next(this.user as User);
+            } else {
+              observer.next(null);
+            }
+            observer.complete();
+          },
+          error: (error) => {
+            observer.error(error);
+          },
+        });
+      } else {
+        // Aucun utilisateur
+        observer.next(null);
+        observer.complete();
+      }
+    });
   }
 
   getCurrentUser() {

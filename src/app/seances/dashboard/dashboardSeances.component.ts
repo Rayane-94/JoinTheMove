@@ -7,6 +7,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { formatDate, formatTemps } from '../../shared/utils/date';
 import { AuthService, User } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../shared/services/toast/toast.service';
 
 @Component({
   selector: 'app-seances-dashboard',
@@ -28,17 +29,39 @@ export class SeancesDashboardComponent implements OnInit {
   constructor(
     private seancesService: SeancesService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
-    const currentUser = this.authService.getCurrentUser();
-    if (!currentUser) {
-      this.errorMessage = 'Vous devez être connecté pour voir vos séances';
-      this.isLoading = false;
-      return;
-    }
-    this.chargerSeances(currentUser);
+    this.verifierEtChargerSeances();
+  }
+
+  private verifierEtChargerSeances() {
+    this.authService.getCurrentUserAsync().subscribe({
+      next: (utilisateur) => {
+        if (utilisateur) {
+          this.chargerSeances(utilisateur);
+        } else {
+          this.gererUtilisateurNonConnecte();
+        }
+      },
+      error: (error) => {
+        console.error(
+          'Erreur lors de la récupération des données utilisateur:',
+          error
+        );
+        this.gererUtilisateurNonConnecte();
+      },
+    });
+  }
+
+  private gererUtilisateurNonConnecte() {
+    this.errorMessage = 'Vous devez être connecté pour voir vos séances';
+    this.isLoading = false;
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 2000);
   }
 
   chargerSeances(utilisateur: User) {
@@ -65,6 +88,32 @@ export class SeancesDashboardComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.updateSeancesAffichees();
+  }
+
+  supprimerSeance(seance: SeanceAvecCategorie) {
+    if (
+      confirm(
+        `Êtes-vous sûr de vouloir supprimer la séance "${seance.label}" ?`
+      )
+    ) {
+      this.seancesService.supprimerSeance(seance.id).subscribe({
+        next: (success) => {
+          if (success) {
+            this.seances = this.seances.filter((s) => s.id !== seance.id);
+            this.totalSeances = this.seances.length;
+            this.updateSeancesAffichees();
+            this.toastService.succes('Séance supprimée avec succès !');
+            this.errorMessage = '';
+          }
+        },
+        error: (error) => {
+          this.toastService.erreur(
+            'Erreur lors de la suppression de la séance'
+          );
+          console.error('Erreur:', error);
+        },
+      });
+    }
   }
 
   private updateSeancesAffichees() {
@@ -108,6 +157,14 @@ export class SeancesDashboardComponent implements OnInit {
 
   formatTemps(date: string | Date): string {
     return formatTemps(new Date(date));
+  }
+
+  marquerSeanceRealisee(seance: SeanceAvecCategorie) {
+    // TODO: Implémenter la logique pour marquer une séance comme réalisée
+    // Cette fonctionnalité sera développée plus tard
+    this.toastService.info(
+      `Fonctionnalité à venir : Marquer "${seance.label}" comme réalisée`
+    );
   }
 
   editerSeance(seance: SeanceAvecCategorie) {

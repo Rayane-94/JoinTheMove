@@ -422,3 +422,26 @@
     height: 28px;
   }
 }
+
+::ng-deep .success-toast {
+  background-color: #10b981 !important;
+  color: white !important;
+}
+
+::ng-deep .success-toast .mat-simple-snack-bar-action {
+  color: white !important;
+}
+
+::ng-deep .error-toast {
+  background-color: #ef4444 !important;
+  color: white !important;
+}
+
+::ng-deep .error-toast .mat-simple-snack-bar-action {
+  color: white !important;
+}
+
+::ng-deep .mat-snack-bar-container {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}

@@ -33,7 +33,7 @@
       "description": "Séance complète pour le haut du corps : pectoraux, dos, épaules et bras. Parfait pour développer la force et la masse musculaire du upper body.",
       "idUtilisateur": "1",
       "exercice": null,
-      "idCategorie": 1
+      "idCategorie": "1"
     },
     {
       "id": "2ah3",
@@ -42,7 +42,7 @@
       "description": "Séance de running axée sur l'endurance fondamentale. Course de 45 minutes à allure modérée pour améliorer la capacité cardiovasculaire.",
       "idUtilisateur": "1",
       "exercice": null,
-      "idCategorie": 3
+      "idCategorie": "3"
     },
     {
       "id": "5th3",
@@ -51,59 +51,41 @@
       "description": "",
       "idUtilisateur": "e41d",
       "exercice": null,
-      "idCategorie": 4
+      "idCategorie": "4"
     },
     {
-      "id": "e1d0",
-      "label": "moiOUOUO",
-      "description": "SRTSERSERERSSERSER",
-      "dateCreation": "2025-10-19T14:21:20.346Z",
+      "id": "bd99",
+      "label": "oui",
+      "description": "",
+      "dateCreation": "2025-11-09T21:48:57.062Z",
       "idUtilisateur": "9748",
       "exercice": null,
-      "idCategorie": 4
-    },
-    {
-      "id": "a6c8",
-      "label": "oooooooooooo",
-      "description": "ilmiomimoi",
-      "dateCreation": "2025-10-19T14:46:15.456Z",
-      "idUtilisateur": "9748",
-      "exercice": null,
-      "idCategorie": 3
-    },
-    {
-      "id": "56e2",
-      "label": "fgjkzerhbguierbuiog",
-      "description": "fgngjerguyierg",
-      "dateCreation": "2025-10-21T13:09:43.653Z",
-      "idUtilisateur": "9748",
-      "exercice": null,
-      "idCategorie": 5
+      "idCategorie": "3"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "label": "Musculation",
       "estVisible": true
     },
     {
-      "id": 2,
+      "id": "2",
       "label": "Cardio",
       "estVisible": true
     },
     {
-      "id": 3,
+      "id": "3",
       "label": "Course à pied",
       "estVisible": true
     },
     {
-      "id": 4,
+      "id": "4",
       "label": "Yoga",
       "estVisible": true
     },
     {
-      "id": 5,
+      "id": "5",
       "label": "Natation",
       "estVisible": true
     }
