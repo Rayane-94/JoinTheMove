@@ -3,7 +3,7 @@
   <app-header activeRoute="seances"></app-header>
 
   <!-- Main Content -->
-  <div class="p-6">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div>
@@ -41,7 +41,7 @@
     >
       <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
         <div class="flex items-center">
-          <div class="p-3 bg-blue-100 rounded-lg">
+          <div class="p-3 bg-blue-100 rounded-lg flex">
             <mat-icon class="text-blue-600">fitness_center</mat-icon>
           </div>
           <div class="ml-4">
@@ -53,7 +53,7 @@
 
       <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
         <div class="flex items-center">
-          <div class="p-3 bg-green-100 rounded-lg">
+          <div class="p-3 bg-green-100 rounded-lg flex">
             <mat-icon class="text-green-600">schedule</mat-icon>
           </div>
           <div class="ml-4">
@@ -132,13 +132,15 @@
               >
                 <button
                   mat-icon-button
-                  class="!text-gray-400 hover:!text-blue-600 hover:!bg-blue-50 transition-colors"
+                  class="!text-gray-400 hover:!text-green-600 hover:!bg-green-50 transition-colors"
+                  (click)="marquerSeanceRealisee(seance)"
+                  title="Marquer comme réalisée"
                 >
-                  <mat-icon>visibility</mat-icon>
+                  <mat-icon>check_circle_outline</mat-icon>
                 </button>
                 <button
                   mat-icon-button
-                  class="!text-gray-400 hover:!text-green-600 hover:!bg-green-50 transition-colors"
+                  class="!text-gray-400 hover:!text-blue-600 hover:!bg-blue-50 transition-colors"
                   (click)="editerSeance(seance)"
                   title="Modifier la séance"
                 >
@@ -147,6 +149,8 @@
                 <button
                   mat-icon-button
                   class="!text-gray-400 hover:!text-red-600 hover:!bg-red-50 transition-colors"
+                  (click)="supprimerSeance(seance)"
+                  title="Supprimer la séance"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>
@@ -162,7 +166,7 @@
           <div
             class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
           >
-            <mat-icon class="text-4xl text-gray-400">fitness_center</mat-icon>
+            <mat-icon class="text-gray-400">fitness_center</mat-icon>
           </div>
           <h3 class="text-lg font-medium text-gray-900 mb-2">
             Aucune séance trouvée

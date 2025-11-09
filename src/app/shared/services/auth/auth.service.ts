@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 export interface User {
@@ -69,7 +69,7 @@ export class AuthService {
     return false;
   }
 
-  private getSavedUserInfo(): Observable<any[]> {
+  getSavedUserInfo(): Observable<any[]> {
     const userId = this.getSavedUser();
     return this.http.get<any[]>(`${this.apiUrl}?id=${userId}`);
   }
@@ -84,6 +84,21 @@ export class AuthService {
 
   getUserLastName(): string {
     return this.user?.nom || '';
+  }
+
+  getCurrentUserAsync(): Observable<User | null> {
+    if (this.user) {
+      return of(this.user as User);
+    } else if (this.getSavedUser()) {
+      return this.getSavedUserInfo().pipe(
+        map((users: any) => (users && users.length > 0 ? users[0] : null)),
+        tap((user) => {
+          if (user) this.user = user;
+        })
+      );
+    } else {
+      return of(null);
+    }
   }
 
   getCurrentUser() {

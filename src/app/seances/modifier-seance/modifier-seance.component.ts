@@ -123,7 +123,7 @@ export class ModifierSeanceComponent implements OnInit {
         ...this.originalSeance,
         label: formValue.label,
         description: formValue.description,
-        idCategorie: parseInt(formValue.idCategorie),
+        idCategorie: formValue.idCategorie,
       };
 
       this.seancesService.modifierSeance(seanceModifiee).subscribe({
@@ -132,7 +132,7 @@ export class ModifierSeanceComponent implements OnInit {
           this.successMessage = 'Séance modifiée avec succès !';
           setTimeout(() => {
             this.router.navigate(['/seances']);
-          }, 2000);
+          }, 200);
         },
         error: (error) => {
           this.isLoading = false;

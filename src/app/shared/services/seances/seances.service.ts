@@ -10,7 +10,7 @@ export interface Seance {
   description: string;
   idUtilisateur: string | null;
   exercice: any | null;
-  idCategorie: number | null;
+  idCategorie: string | null;
 }
 
 export interface SeanceAvecCategorie extends Seance {
@@ -81,6 +81,10 @@ export class SeancesService {
         typeof seance.idUtilisateur === 'string'
           ? seance.idUtilisateur
           : String(seance.idUtilisateur),
+      idCategorie:
+        typeof seance.idCategorie === 'string'
+          ? seance.idCategorie
+          : String(seance.idCategorie),
     };
     console.log('Séance formatée avant envoi:', seanceFormatted);
     return this.http.post<Seance>(
@@ -90,9 +94,26 @@ export class SeancesService {
   }
 
   modifierSeance(seance: Seance): Observable<Seance> {
+    const seanceFormatted = {
+      ...seance,
+      idUtilisateur:
+        typeof seance.idUtilisateur === 'string'
+          ? seance.idUtilisateur
+          : String(seance.idUtilisateur),
+      idCategorie:
+        typeof seance.idCategorie === 'string'
+          ? seance.idCategorie
+          : String(seance.idCategorie),
+    };
     return this.http.put<Seance>(
       `http://localhost:3000/seances/${seance.id}`,
-      seance
+      seanceFormatted
     );
+  }
+
+  supprimerSeance(id: string): Observable<boolean> {
+    return this.http
+      .delete(`http://localhost:3000/seances/${id}`)
+      .pipe(map(() => true));
   }
 }
