@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 export interface User {
@@ -87,33 +87,18 @@ export class AuthService {
   }
 
   getCurrentUserAsync(): Observable<User | null> {
-    return new Observable((observer) => {
-      if (this.user) {
-        // Utilisateur déjà en mémoire
-        observer.next(this.user as User);
-        observer.complete();
-      } else if (this.getSavedUser()) {
-        // Récupérer l'utilisateur depuis le localStorage
-        this.getSavedUserInfo().subscribe({
-          next: (users: any) => {
-            if (users && users.length > 0) {
-              this.user = users[0];
-              observer.next(this.user as User);
-            } else {
-              observer.next(null);
-            }
-            observer.complete();
-          },
-          error: (error) => {
-            observer.error(error);
-          },
-        });
-      } else {
-        // Aucun utilisateur
-        observer.next(null);
-        observer.complete();
-      }
-    });
+    if (this.user) {
+      return of(this.user as User);
+    } else if (this.getSavedUser()) {
+      return this.getSavedUserInfo().pipe(
+        map((users: any) => (users && users.length > 0 ? users[0] : null)),
+        tap((user) => {
+          if (user) this.user = user;
+        })
+      );
+    } else {
+      return of(null);
+    }
   }
 
   getCurrentUser() {
