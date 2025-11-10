@@ -61,6 +61,24 @@
       "idUtilisateur": "9748",
       "exercice": null,
       "idCategorie": "3"
+    },
+    {
+      "id": "9dc0",
+      "label": "Piscine",
+      "description": "Dos crawlé",
+      "dateCreation": "2025-11-09T23:19:45.378Z",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "5"
+    },
+    {
+      "id": "b784",
+      "label": "tetsfzfzefz",
+      "description": "ghjezg hhgip hgreiphg ehgieprhgeri gehrigher gherigher ioghregherhbhub behjgerjgberjhgbre jbj ebkgje bgjerbg ",
+      "dateCreation": "2025-11-09T23:27:22.065Z",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "4"
     }
   ],
   "categories": [
@@ -88,6 +106,96 @@
       "id": "5",
       "label": "Natation",
       "estVisible": true
+    }
+  ],
+  "historique": [
+    {
+      "id": "bd99",
+      "label": "oui",
+      "description": "",
+      "dateCreation": "2025-11-09T21:48:57.062Z",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "3",
+      "dateRealisee": "2025-11-09T22:15:30.000Z",
+      "tempsRealise": 30,
+      "difficulte": "moyenne"
+    },
+    {
+      "id": "bd99-2",
+      "label": "oui",
+      "dateCreation": "2025-11-09T21:48:57.062Z",
+      "description": "",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "3",
+      "dateRealisee": "2025-11-09T22:54:47.091Z",
+      "tempsRealise": 28,
+      "difficulte": "facile"
+    },
+    {
+      "id": "bd99-1762729062512",
+      "label": "oui",
+      "dateCreation": "2025-11-09T21:48:57.062Z",
+      "description": "",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "3",
+      "dateRealisee": "2025-11-09T22:57:42.512Z",
+      "tempsRealise": 52,
+      "difficulte": "moyenne"
+    },
+    {
+      "id": "9dc0-1762730408274",
+      "label": "Piscine",
+      "dateCreation": "2025-11-09T23:19:45.378Z",
+      "description": "Dos crawlé",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "5",
+      "dateRealisee": "2025-11-09T23:20:08.285Z",
+      "tempsRealise": 90,
+      "difficulte": "difficile",
+      "categorieLabel": "Natation"
+    },
+    {
+      "id": "b784-1762732214904",
+      "label": "tetsfzfzefz",
+      "dateCreation": "2025-11-09T23:27:22.065Z",
+      "description": "ghjezg hhgip hgreiphg ehgieprhgeri gehrigher gherigher ioghregherhbhub behjgerjgberjhgbre jbj ebkgje bgjerbg ",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "4",
+      "dateRealisee": "2025-11-09T23:50:14.910Z",
+      "tempsRealise": 30,
+      "difficulte": "difficile",
+      "categorieLabel": "Yoga"
+    },
+    {
+      "id": "5th3-1762734011197",
+      "label": "Séance jeudi",
+      "dateCreation": "2025-10-17T18:30:00.000Z",
+      "description": "",
+      "idUtilisateur": "e41d",
+      "exercice": null,
+      "idCategorie": "4",
+      "dateRealisee": "2025-11-10T00:20:11.202Z",
+      "tempsRealise": 30,
+      "difficulte": "moyenne",
+      "categorieLabel": "Yoga"
+    },
+    {
+      "id": "5th3-1762734349910",
+      "label": "Séance jeudi",
+      "dateCreation": "2025-10-17T18:30:00.000Z",
+      "description": "",
+      "idUtilisateur": "e41d",
+      "exercice": null,
+      "idCategorie": "4",
+      "dateRealisee": "2025-11-10T00:25:49.915Z",
+      "tempsRealise": 90,
+      "difficulte": "facile",
+      "categorieLabel": "Yoga"
     }
   ]
 }

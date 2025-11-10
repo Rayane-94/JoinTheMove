@@ -8,6 +8,9 @@ import { formatDate, formatTemps } from '../../shared/utils/date';
 import { AuthService, User } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../shared/services/toast/toast.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupSeanceRealiseeComponent } from '../../shared/components/popup-seance-realisee/popup-seance-realisee.component';
+import { HistoriqueService } from '../../shared/services/historique/historique.service';
 
 @Component({
   selector: 'app-seances-dashboard',
@@ -30,7 +33,9 @@ export class SeancesDashboardComponent implements OnInit {
     private seancesService: SeancesService,
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private dialog: MatDialog,
+    private historiqueService: HistoriqueService
   ) {}
 
   ngOnInit() {
@@ -160,11 +165,57 @@ export class SeancesDashboardComponent implements OnInit {
   }
 
   marquerSeanceRealisee(seance: SeanceAvecCategorie) {
-    // TODO: Implémenter la logique pour marquer une séance comme réalisée
-    // Cette fonctionnalité sera développée plus tard
-    this.toastService.info(
-      `Fonctionnalité à venir : Marquer "${seance.label}" comme réalisée`
-    );
+    const dialogRef = this.dialog.open(PopupSeanceRealiseeComponent, {
+      width: '500px',
+      maxWidth: '90vw',
+      data: { seance },
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.enregistrerSeanceDansHistorique(
+          seance,
+          result.tempsRealise,
+          result.difficulte
+        );
+      }
+    });
+  }
+
+  private enregistrerSeanceDansHistorique(
+    seance: SeanceAvecCategorie,
+    tempsRealise: number,
+    difficulte: 'facile' | 'moyenne' | 'difficile'
+  ) {
+    const seanceForHistorique = {
+      id: seance.id,
+      label: seance.label,
+      dateCreation: seance.dateCreation,
+      description: seance.description,
+      idUtilisateur: seance.idUtilisateur,
+      exercice: seance.exercice,
+      idCategorie: seance.idCategorie,
+    };
+
+    this.historiqueService
+      .ajouterSeanceAHistorique(seanceForHistorique, tempsRealise, difficulte)
+      .subscribe({
+        next: (seanceEnregistree) => {
+          this.toastService.succes(
+            `Séance "${seance.label}" marquée comme réalisée ! Temps: ${tempsRealise}min, Difficulté: ${difficulte}`
+          );
+        },
+        error: (error) => {
+          console.error(
+            "Erreur lors de l'enregistrement de la séance :",
+            error
+          );
+          this.toastService.erreur(
+            "Erreur lors de l'enregistrement de la séance dans l'historique"
+          );
+        },
+      });
   }
 
   editerSeance(seance: SeanceAvecCategorie) {

@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { FormSeanceComponent } from './seances/form-seance/form-seance.component
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { HistoriqueComponent } from './historique/historique.component';
+import { PopupSeanceRealiseeComponent } from './shared/components/popup-seance-realisee/popup-seance-realisee.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { ToastComponent } from './shared/components/toast/toast.component';
     FormSeanceComponent,
     HeaderComponent,
     ModifierSeanceComponent,
+    HistoriqueComponent,
+    PopupSeanceRealiseeComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,7 @@ import { ToastComponent } from './shared/components/toast/toast.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatDialogModule,
     ToastComponent,
   ],
   exports: [RouterModule],
