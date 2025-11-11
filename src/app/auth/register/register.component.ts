@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { passwordStrengthValidator } from '../../shared/validators/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  errorMessage: string = ''; 
+  successMessage: string = ''; 
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +27,11 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.authService.isUserConnected()) {
+      this.router.navigate(['/dashboard']);
+      return;
+    }
+
     this.registerForm = this.fb.group(
       {
         nom: new FormControl('', Validators.required),
@@ -32,6 +40,7 @@ export class RegisterComponent implements OnInit {
         mdp: new FormControl('', [
           Validators.required,
           Validators.minLength(4),
+          passwordStrengthValidator(), // 🔐 Validator personnalisé
         ]),
         confirmPassword: new FormControl('', Validators.required),
         role: new FormControl('user', Validators.required),
@@ -41,25 +50,53 @@ export class RegisterComponent implements OnInit {
   }
 
   addUser() {
-    if (this.registerForm.invalid) return;
-    this.authService
-      .addUser({
-        nom: this.registerForm.value.nom,
-        prenom: this.registerForm.value.prenom,
-        email: this.registerForm.value.email,
-        mdp: this.registerForm.value.mdp,
-        role: this.registerForm.value.role,
-      })
-      .subscribe({
-        next: (response) => {
-          console.log('Utilisateur créé avec succès:', response);
-          this.router.navigate(['/login']);
-        },
-        error: (error) => {
-          console.error('Erreur lors de la création:', error);
-          alert('Erreur lors de la création du compte');
-        },
-      });
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    if (this.registerForm.invalid) {
+      this.errorMessage = this.getErrorLabel;
+      return;
+    }
+
+    const email = this.registerForm.value.email;
+
+    // 📧 Vérifie d'abord si l'email existe déjà
+    this.authService.checkEmailExists(email).subscribe({
+      next: (exists) => {
+        if (exists) {
+          this.errorMessage = '❌ Cet email est déjà utilisé. Veuillez en choisir un autre.';
+          this.registerForm.get('email')?.setErrors({ emailExists: true });
+          return;
+        }
+
+        // ✅ Email disponible, on peut créer le compte
+        this.authService
+          .addUser({
+            nom: this.registerForm.value.nom,
+            prenom: this.registerForm.value.prenom,
+            email: email,
+            mdp: this.registerForm.value.mdp,
+            role: this.registerForm.value.role,
+          })
+          .subscribe({
+            next: (response) => {
+              console.log('Utilisateur créé avec succès:', response);
+              this.successMessage = '✅ Compte créé avec succès ! Redirection...';
+              setTimeout(() => {
+                this.router.navigate(['/login']);
+              }, 1500);
+            },
+            error: (error) => {
+              console.error('Erreur lors de la création:', error);
+              this.errorMessage = '❌ Erreur lors de la création du compte. Veuillez réessayer.';
+            },
+          });
+      },
+      error: (error) => {
+        console.error('Erreur lors de la vérification de l\'email:', error);
+        this.errorMessage = '❌ Erreur de connexion au serveur. Veuillez réessayer.';
+      },
+    });
   }
 
   private checkPasswords(formGroup: FormGroup) {
@@ -83,14 +120,30 @@ export class RegisterComponent implements OnInit {
   }
 
   get getErrorLabel() {
+    const mdpControl = this.registerForm.controls?.['mdp'];
+    const emailControl = this.registerForm.controls?.['email'];
+
     if (this.registerForm.errors?.['required'])
-      return 'Les champs sont obligatoires';
-    if (!!this.registerForm.controls?.['mdp']?.errors?.['minlength'])
-      return `La longueur minimal pour votre mot de passe est ${this.registerForm.controls?.['mdp']?.errors?.['minlength']?.requiredLength}`;
+      return '⚠️ Tous les champs sont obligatoires';
+    
+    if (emailControl?.errors?.['email'])
+      return '📧 Format d\'email invalide';
+    
+    if (emailControl?.errors?.['emailExists'])
+      return '❌ Cet email est déjà utilisé';
+    
+    if (mdpControl?.errors?.['minlength'])
+      return `🔐 Le mot de passe doit contenir au moins ${mdpControl?.errors?.['minlength']?.requiredLength} caractères`;
+    
+    if (mdpControl?.errors?.['passwordStrength'])
+      return '🔐 Le mot de passe doit contenir au moins une lettre ET un chiffre';
+    
     if (this.registerForm.errors?.['missMatch'])
-      return 'Les mots de passe ne correspondent pas';
+      return '🔄 Les mots de passe ne correspondent pas';
+    
     if (this.registerForm.errors?.['usernamePassword'])
-      return 'Le mot de passe comporte des informations personnelles';
-    return 'Un problème est survenu';
+      return '⚠️ Le mot de passe ne doit pas contenir votre email';
+    
+    return '❌ Un problème est survenu';
   }
 }

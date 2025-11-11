@@ -45,8 +45,9 @@
           [class.input-error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
         >
         <span class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-          <span *ngIf="registerForm.get('email')?.errors?.['required']">L'email est obligatoire</span>
-          <span *ngIf="registerForm.get('email')?.errors?.['email']">L'email n'est pas valide</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">📧 L'email est obligatoire</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">📧 L'email n'est pas valide</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['emailExists']">❌ Cet email est déjà utilisé</span>
         </span>
       </div>
 
@@ -57,13 +58,16 @@
           id="mdp" 
           formControlName="mdp" 
           class="input"
-          placeholder="Minimum 4 caractères"
+          placeholder="Minimum 4 caractères (lettres + chiffres)"
           [class.input-error]="registerForm.get('mdp')?.invalid && registerForm.get('mdp')?.touched"
         >
         <span class="error-message" *ngIf="registerForm.get('mdp')?.invalid && registerForm.get('mdp')?.touched">
-          <span *ngIf="registerForm.get('mdp')?.errors?.['required']">Le mot de passe est obligatoire</span>
+          <span *ngIf="registerForm.get('mdp')?.errors?.['required']">🔐 Le mot de passe est obligatoire</span>
           <span *ngIf="registerForm.get('mdp')?.errors?.['minlength']">
-            Le mot de passe doit contenir au moins 4 caractères
+            🔐 Le mot de passe doit contenir au moins 4 caractères
+          </span>
+          <span *ngIf="registerForm.get('mdp')?.errors?.['passwordStrength']">
+            🔐 Le mot de passe doit contenir au moins une lettre ET un chiffre
           </span>
         </span>
       </div>
@@ -93,6 +97,14 @@
           <option value="user">Utilisateur</option>
           <option value="admin">Administrateur</option>
         </select>
+      </div>
+
+      <div class="alert alert-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
       </div>
 
       <div class="register_error" *ngIf="registerForm.errors && registerForm.touched">

@@ -22,6 +22,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<any[]>(`${this.apiUrl}?email=${email}`).pipe(
+      map(users => users.length > 0)
+    );
+  }
+
   addUser(user: {
     nom: string;
     prenom: string;
@@ -55,17 +61,23 @@ export class AuthService {
   }
 
   isUserConnected(): boolean {
+    // Vérifie d'abord si l'utilisateur est en mémoire
     if (this.user) {
-      this.saveUser();
-      return true;
-    } else if (this.getSavedUser()) {
-      this.getSavedUserInfo().subscribe((user: any) => {
-        if (user && user.length > 0) {
-          this.user = user[0];
-        }
-      });
       return true;
     }
+    
+    // Sinon, essaie de restaurer depuis le localStorage
+    const savedUserData = this.getSavedUser();
+    if (savedUserData && savedUserData !== '') {
+      try {
+        return true;
+      } catch (error) {
+        console.error('Erreur lors de la vérification de connexion:', error);
+        localStorage.removeItem('user');
+        return false;
+      }
+    }
+    
     return false;
   }
 
