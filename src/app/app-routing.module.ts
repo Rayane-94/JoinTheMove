@@ -8,6 +8,7 @@ import { guardGuard } from './shared/guards/guard.guard';
 import { FormSeanceComponent } from './seances/form-seance/form-seance.component';
 import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import { ProfilComponent } from './profil/profil.component';
 import { EventComponent } from '../event/event.component';
 import { EventCreationComponent } from '../event/event-creation.component'
 
@@ -37,22 +38,32 @@ const routes: Routes = [
   {
     path: 'seances/nouvelle',
     component: FormSeanceComponent,
+    canActivate: [guardGuard],
   },
   {
     path: 'seances/modifier/:id',
     component: ModifierSeanceComponent,
+    canActivate: [guardGuard],
   },
   {
     path: 'historique',
     component: HistoriqueComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent,
+    canActivate: [guardGuard],
   },
   {
     path: 'evenements',
     component: EventComponent,
+    canActivate: [guardGuard],
   },
   {
     path: 'evenements/creer',
     component: EventCreationComponent,
+    canActivate: [guardGuard],
   },
 ];
 
