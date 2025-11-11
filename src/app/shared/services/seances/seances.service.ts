@@ -1,29 +1,119 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map } from 'rxjs';
+import { CategorieService, Categorie } from '../categories/categories.service';
 
 export interface Seance {
-  id: number;
+  id: string;
   label: string;
   dateCreation: Date;
-  lieu: string;
   description: string;
-  idUtilisateur: number | null;
+  idUtilisateur: string | null;
   exercice: any | null;
-  categorie: any | null;
+  idCategorie: string | null;
+}
+
+export interface SeanceAvecCategorie extends Seance {
+  categorieLabel?: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeancesService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private categorieService: CategorieService
+  ) {}
 
   recupererSeances(): Observable<Seance[]> {
     return this.http.get<Seance[]>('http://localhost:3000/seances');
   }
 
-  recupererUneSeance(id: number): Observable<Seance> {
+  recupererSeancesParUtilisateur(idUtilisateur: string): Observable<Seance[]> {
+    return this.http.get<Seance[]>(
+      `http://localhost:3000/seances?idUtilisateur=${idUtilisateur}`
+    );
+  }
+
+  recupererSeancesAvecCategories(): Observable<SeanceAvecCategorie[]> {
+    return forkJoin({
+      seances: this.recupererSeances(),
+      categories: this.categorieService.recupererCategories(),
+    }).pipe(
+      map(({ seances, categories }) => {
+        return seances.map((seance) => ({
+          ...seance,
+          categorieLabel: seance.idCategorie
+            ? categories.find((cat) => cat.id === seance.idCategorie)?.label
+            : undefined,
+        }));
+      })
+    );
+  }
+
+  recupererSeancesAvecCategoriesParUtilisateur(
+    id: string
+  ): Observable<SeanceAvecCategorie[]> {
+    return forkJoin({
+      seances: this.recupererSeancesParUtilisateur(id),
+      categories: this.categorieService.recupererCategories(),
+    }).pipe(
+      map(({ seances, categories }) => {
+        return seances.map((seance) => ({
+          ...seance,
+          categorieLabel: seance.idCategorie
+            ? categories.find((cat) => cat.id === seance.idCategorie)?.label
+            : undefined,
+        }));
+      })
+    );
+  }
+
+  recupererUneSeanceParId(id: string): Observable<Seance> {
     return this.http.get<Seance>(`http://localhost:3000/seances/${id}`);
+  }
+
+  ajouterSeance(seance: Seance): Observable<Seance> {
+    const seanceFormatted = {
+      ...seance,
+      idUtilisateur:
+        typeof seance.idUtilisateur === 'string'
+          ? seance.idUtilisateur
+          : String(seance.idUtilisateur),
+      idCategorie:
+        typeof seance.idCategorie === 'string'
+          ? seance.idCategorie
+          : String(seance.idCategorie),
+    };
+    console.log('Séance formatée avant envoi:', seanceFormatted);
+    return this.http.post<Seance>(
+      'http://localhost:3000/seances',
+      seanceFormatted
+    );
+  }
+
+  modifierSeance(seance: Seance): Observable<Seance> {
+    const seanceFormatted = {
+      ...seance,
+      idUtilisateur:
+        typeof seance.idUtilisateur === 'string'
+          ? seance.idUtilisateur
+          : String(seance.idUtilisateur),
+      idCategorie:
+        typeof seance.idCategorie === 'string'
+          ? seance.idCategorie
+          : String(seance.idCategorie),
+    };
+    return this.http.put<Seance>(
+      `http://localhost:3000/seances/${seance.id}`,
+      seanceFormatted
+    );
+  }
+
+  supprimerSeance(id: string): Observable<boolean> {
+    return this.http
+      .delete(`http://localhost:3000/seances/${id}`)
+      .pipe(map(() => true));
   }
 }
