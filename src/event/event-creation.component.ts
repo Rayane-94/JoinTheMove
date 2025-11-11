@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventServiceService, Event } from '../app/shared/services/evenement/event-service.service';
+import { Categorie } from '../app/shared/services/categories/categories.service';
+import { Niveau } from '../app/shared/services/evenement/event-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     standalone: false,
@@ -9,21 +12,38 @@ import { EventServiceService, Event } from '../app/shared/services/evenement/eve
     styleUrls: ['./event.component.css']
 })
 export class EventCreationComponent {
+  categories: Categorie[] = [];
+  niveaux: Niveau[] = ['Débutant', 'Intermédiaire', 'Avancé'];
+  
   newEvent: Partial<Event> = {
-    title: '',
+    categorie: '',
+    nombreMaxParticipants: 10,
+    adress: '',
     date: '',
-    lieu: '',
-    description: ''
+    niveau: 'Débutant',
+    dateCreation: '',
+    idUtilisateur: ''
   };
 
-  constructor(private eventService: EventServiceService, private router: Router) {}
+  constructor(
+    private eventService: EventServiceService, 
+    private router: Router, 
+    private http: HttpClient) {
+        this.http.get<Categorie[]>('http://localhost:3000/categories').subscribe(categorieRef => {
+          this.categories = categorieRef.filter(c => c.estVisible);
+        });
+    }
 
   create() {
-    const payload = {
-      title: this.newEvent.title || '',
-      date: this.newEvent.date || '',
-      lieu: this.newEvent.lieu || '',
-      description: this.newEvent.description || ''
+    if (!this.newEvent.categorie || !this.newEvent.adress || !this.newEvent.date) return;
+
+     const payload: Omit<Event, 'id' | 'dateCreation'> = {
+      categorie: this.newEvent.categorie!,
+      nombreMaxParticipants: this.newEvent.nombreMaxParticipants ?? 10,
+      adress: this.newEvent.adress!,
+      date: new Date(this.newEvent.date!).toISOString(),
+      niveau: this.newEvent.niveau ?? 'Débutant',
+      idUtilisateur: '1'
     };
 
     this.eventService.createEvent(payload).subscribe((created) => {

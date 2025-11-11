@@ -2,12 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export type Niveau = 'Débutant' | 'Intermédiaire' | 'Avancé';
 export interface Event {
-  id: number;
-  title: string;
+  id: string;
+  categorie: string;
+  nombreMaxParticipants: number;
+  adress: string;
   date: string;
-  lieu: string;
-  description: string;
+  niveau: Niveau;
+  dateCreation: string;
+  idUtilisateur: string;
 }
 
 @Injectable({
@@ -16,14 +20,27 @@ export interface Event {
 
 
 export class EventServiceService {
-
+  private readonly baseUrl = 'http://localhost:3000/events';
   constructor(private http: HttpClient) {}
 
   getAllEvents(): Observable<Event[]>{
-    return this.http.get<Event[]>('http://localhost:3000/events');
+    return this.http.get<Event[]>(this.baseUrl);
   }
 
-  createEvent(event: Omit<Event, 'id'>): Observable<Event> {
-    return this.http.post<Event>('http://localhost:3000/events', event);
+  getById(id: string): Observable<Event> {
+    return this.http.get<Event>(`${this.baseUrl}/${id}`);
+  }
+
+  createEvent(event: Omit<Event, 'id' | 'dateCreation'>): Observable<Event> {
+    const body = {...event, dateCreation: new Date().toISOString()};
+    return this.http.post<Event>(this.baseUrl, event);
+  }
+
+   update(id: string, patch: Partial<Event>): Observable<Event> {
+    return this.http.patch<Event>(`${this.baseUrl}/${id}`, patch);
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

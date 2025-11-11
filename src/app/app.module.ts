@@ -32,7 +32,9 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { PopupSeanceRealiseeComponent } from './shared/components/popup-seance-realisee/popup-seance-realisee.component';
 import { ProfilComponent } from './profil/profil.component';
-
+import { FormsModule } from '@angular/forms';
+import { EventComponent } from '../event/event.component';
+import { EventCreationComponent } from '../event/event-creation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,8 @@ import { ProfilComponent } from './profil/profil.component';
     HistoriqueComponent,
     PopupSeanceRealiseeComponent,
     ProfilComponent,
+    EventComponent, 
+    EventCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ import { ProfilComponent } from './profil/profil.component';
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     AppRoutingModule,
+    FormsModule,
     // Angular Material Modules
     MatToolbarModule,
     MatCardModule,

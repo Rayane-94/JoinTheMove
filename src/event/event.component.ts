@@ -1,7 +1,10 @@
+import { Event, EventServiceService } from '../app/shared/services/evenement/event-service.service';
 import { Component, OnInit } from '@angular/core';
+import { Categorie } from '../app/shared/services/categories/categories.service';
+import { HttpClient } from '@angular/common/http';
 // import { CommonModule } from '@angular/common';
 // import { FormsModule } from '@angular/forms';
-import { Event, EventServiceService } from '../app/shared/services/evenement/event-service.service';
+
 
 @Component({
   selector: 'app-event',
@@ -12,37 +15,23 @@ import { Event, EventServiceService } from '../app/shared/services/evenement/eve
 export class EventComponent implements OnInit {
   //pour affichier list event compo html
   events: Event[] = [];
-  //si creation nouveau obj model (sans id)
-  newEvent: Partial<Event> = {
-    title: '',
-    date: '',
-    lieu: '',
-    description: '',
-  };
+  categoriesById = new Map<string, Categorie>();
 
-  constructor(private eventService: EventServiceService) {}
+  constructor(private eventService: EventServiceService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadEvents();
-  }
+  } 
 
   loadEvents() {
-    this.eventService.getAllEvents().subscribe((events) => {
-      this.events = events;
+    this.eventService.getAllEvents().subscribe(eventRef => this.events = eventRef);
+    this.http.get<Categorie[]>('http://localhost:3000/categories').subscribe(cats => {
+      this.categoriesById = new Map(cats.map(c => [c.id, c]));
     });
   }
 
-  create() {
-    const payload = {
-      title: this.newEvent.title || "",
-      date: this.newEvent.date || "",
-      lieu: this.newEvent.lieu || "",
-      description: this.newEvent.description || "",
-    };
-
-    this.eventService.createEvent(payload).subscribe((created) => {
-      this.events.push(created);
-      this.newEvent = { title: '', date: '', lieu: '', description: '' };
-    });
+  catLabel(id: string): string {
+    return this.categoriesById.get(id)?.label ?? '—';
   }
+
 }

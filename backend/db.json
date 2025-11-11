@@ -108,6 +108,28 @@
       "estVisible": true
     }
   ],
+  "evenements": [
+    {
+      "id": "ev-001",
+      "categorie": "1",
+      "nombreMaxParticipant": 12,
+      "adresse": "12 Rue du Sport, 75000 Paris",
+      "date": "2025-11-20T18:30:00.000Z",
+      "niveau": "intermediaire",
+      "dateCreation": "2025-11-10T09:00:00.000Z",
+      "idUtilisateur": "1"
+    },
+    {
+      "id": "ev-002",
+      "categorie": "3",
+      "nombreMaxParticipant": 25,
+      "adresse": "Parc Monceau, Paris",
+      "date": "2025-11-22T09:00:00.000Z",
+      "niveau": "debutant",
+      "dateCreation": "2025-11-10T18:30:00.000Z",
+      "idUtilisateur": "1"
+    }
+  ],
   "historique": [
     {
       "id": "bd99",
