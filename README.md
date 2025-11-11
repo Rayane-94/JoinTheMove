@@ -75,8 +75,9 @@ L'application sera accessible sur `http://localhost:4200/`
 
 ## Ressources
 
-<img width="1666" height="1083" alt="image" src="https://github.com/user-attachments/assets/84552a63-cc10-4e52-8bee-337034002e87" />
+<img width="497" height="325" alt="image" src="https://github.com/user-attachments/assets/5bd82cc4-2e51-4894-8fb0-dfef5324b68e" />
 
-<img width="1483" height="1158" alt="image" src="https://github.com/user-attachments/assets/0978ce9e-fd2d-46d0-bf32-ee5ebdd95695" />
+<img width="773" height="606" alt="image" src="https://github.com/user-attachments/assets/7995691b-7f00-48b2-af4e-e2b4d272734f" />
+
 
 
