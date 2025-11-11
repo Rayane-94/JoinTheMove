@@ -8,6 +8,7 @@ import { guardGuard } from './shared/guards/guard.guard';
 import { FormSeanceComponent } from './seances/form-seance/form-seance.component';
 import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import { ProfilComponent } from './profil/profil.component';
 const routes: Routes = [
   {
     path: '',
@@ -34,14 +35,22 @@ const routes: Routes = [
   {
     path: 'seances/nouvelle',
     component: FormSeanceComponent,
+    canActivate: [guardGuard],
   },
   {
     path: 'seances/modifier/:id',
     component: ModifierSeanceComponent,
+    canActivate: [guardGuard],
   },
   {
     path: 'historique',
     component: HistoriqueComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent,
+    canActivate: [guardGuard],
   },
 ];
 
