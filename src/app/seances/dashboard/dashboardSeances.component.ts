@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ToastService } from '../../shared/services/toast/toast.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupSeanceRealiseeComponent } from '../../shared/components/popup-seance-realisee/popup-seance-realisee.component';
+import { PopupDetailsSeanceComponent } from '../../shared/components/popup-details-seance/popup-details-seance.component';
 import { HistoriqueService } from '../../shared/services/historique/historique.service';
 
 @Component({
@@ -216,6 +217,30 @@ export class SeancesDashboardComponent implements OnInit {
           );
         },
       });
+  }
+
+  voirDetailsSeance(seance: SeanceAvecCategorie) {
+    event?.stopPropagation();
+    this.seancesService.recupererSeanceCompleteParId(seance.id).subscribe({
+      next: (seanceComplete) => {
+        this.dialog.open(PopupDetailsSeanceComponent, {
+          data: { seance: seanceComplete },
+          width: '90vw',
+          maxWidth: '1200px',
+          maxHeight: '90vh',
+          panelClass: 'popup-details-seance-dialog',
+        });
+      },
+      error: (error) => {
+        console.error(
+          'Erreur lors du chargement des détails de la séance:',
+          error
+        );
+        this.toastService.erreur(
+          'Erreur lors du chargement des détails de la séance'
+        );
+      },
+    });
   }
 
   editerSeance(seance: SeanceAvecCategorie) {

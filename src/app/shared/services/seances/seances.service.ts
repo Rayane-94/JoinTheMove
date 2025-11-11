@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { CategorieService, Categorie } from '../categories/categories.service';
+import { Exercice } from '../exercices/exercices.service';
 
 export interface Seance {
   id: string;
@@ -9,8 +10,12 @@ export interface Seance {
   dateCreation: Date;
   description: string;
   idUtilisateur: string | null;
-  exercice: any | null;
+  exercice: string[] | null;
   idCategorie: string | null;
+}
+
+export interface SeanceComplete extends Seance {
+  exercicesDetails?: Exercice[];
 }
 
 export interface SeanceAvecCategorie extends Seance {
@@ -74,6 +79,29 @@ export class SeancesService {
     return this.http.get<Seance>(`http://localhost:3000/seances/${id}`);
   }
 
+  recupererSeanceCompleteParId(id: string): Observable<SeanceComplete> {
+    return this.recupererUneSeanceParId(id).pipe(
+      switchMap((seance) => {
+        if (seance.exercice && seance.exercice.length > 0) {
+          const exerciceRequests = seance.exercice.map((exerciceId) =>
+            this.http.get<Exercice>(
+              `http://localhost:3000/exercices/${exerciceId}`
+            )
+          );
+
+          return forkJoin(exerciceRequests).pipe(
+            map((exercicesDetails) => ({
+              ...seance,
+              exercicesDetails,
+            }))
+          );
+        } else {
+          return [{ ...seance, exercicesDetails: [] }];
+        }
+      })
+    );
+  }
+
   ajouterSeance(seance: Seance): Observable<Seance> {
     const seanceFormatted = {
       ...seance,
@@ -86,7 +114,6 @@ export class SeancesService {
           ? seance.idCategorie
           : String(seance.idCategorie),
     };
-    console.log('Séance formatée avant envoi:', seanceFormatted);
     return this.http.post<Seance>(
       'http://localhost:3000/seances',
       seanceFormatted
@@ -114,6 +141,32 @@ export class SeancesService {
   supprimerSeance(id: string): Observable<boolean> {
     return this.http
       .delete(`http://localhost:3000/seances/${id}`)
+      .pipe(map(() => true));
+  }
+
+  ajouterExercicesASeance(
+    seanceId: string,
+    exerciceIds: string[]
+  ): Observable<any> {
+    const seanceExercices = exerciceIds.map((exerciceId, index) => ({
+      id: `${seanceId}-${exerciceId}`,
+      seanceId,
+      exerciceId,
+      ordre: index + 1,
+    }));
+
+    return this.http.post(
+      'http://localhost:3000/seanceExercices',
+      seanceExercices
+    );
+  }
+
+  supprimerExerciceDeSeance(
+    seanceId: string,
+    exerciceId: string
+  ): Observable<boolean> {
+    return this.http
+      .delete(`http://localhost:3000/seanceExercices/${seanceId}-${exerciceId}`)
       .pipe(map(() => true));
   }
 }

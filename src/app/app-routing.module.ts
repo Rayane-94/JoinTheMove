@@ -9,6 +9,8 @@ import { FormSeanceComponent } from './seances/form-seance/form-seance.component
 import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exercices.component';
+import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
 const routes: Routes = [
   {
     path: '',
@@ -50,6 +52,21 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'exercices',
+    component: DashboardExercicesComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'exercices/nouveau',
+    component: FormExerciceComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'exercices/modifier/:id',
+    component: FormExerciceComponent,
     canActivate: [guardGuard],
   },
 ];
