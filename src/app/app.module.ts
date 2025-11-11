@@ -25,6 +25,7 @@ import { EventCreationComponent } from '../event/event-creation.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     // Angular Material Modules
     MatToolbarModule,
     MatCardModule,

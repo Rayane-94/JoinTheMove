@@ -30,5 +30,14 @@
       "exercice": null,
       "categorie": null
     }
-  ]
+  ],
+   "events": [
+     {
+      "id": 1,
+      "title": "Yoga Matinal",
+      "date": "2025-10-20T07:00:00.000",
+      "lieu": "Piscine Clamart - Salle A",
+      "description": "Séance natation"
+    }
+   ]
 }
