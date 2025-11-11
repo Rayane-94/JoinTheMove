@@ -31,6 +31,7 @@ import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-sean
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { PopupSeanceRealiseeComponent } from './shared/components/popup-seance-realisee/popup-seance-realisee.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PopupSeanceRealiseeComponent } from './shared/components/popup-seance-r
     ModifierSeanceComponent,
     HistoriqueComponent,
     PopupSeanceRealiseeComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,

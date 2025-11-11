@@ -54,9 +54,12 @@
       <!-- Right side -->
       <div class="flex items-center space-x-4">
         <!-- User Menu -->
-        <div class="flex items-center space-x-3">
+        <div
+          (click)="navigateTo('/profil')"
+          class="flex items-center space-x-3"
+        >
           <div
-            class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium"
+            class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,9 +77,10 @@
               <circle cx="12" cy="7" r="4" />
             </svg>
           </div>
-          <span class="text-sm font-medium text-gray-700 hidden sm:block">{{
-            getUserDisplayName()
-          }}</span>
+          <span
+            class="text-sm font-medium text-gray-700 hidden sm:block cursor-pointer"
+            >{{ getUserDisplayName() }}</span
+          >
         </div>
 
         <!-- Logout Button -->
