@@ -32,6 +32,9 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { PopupSeanceRealiseeComponent } from './shared/components/popup-seance-realisee/popup-seance-realisee.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exercices.component';
+import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
+import { PopupDetailsSeanceComponent } from './shared/components/popup-details-seance/popup-details-seance.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { ProfilComponent } from './profil/profil.component';
     HistoriqueComponent,
     PopupSeanceRealiseeComponent,
     ProfilComponent,
+    DashboardExercicesComponent,
+    FormExerciceComponent,
+    PopupDetailsSeanceComponent,
   ],
   imports: [
     BrowserModule,
