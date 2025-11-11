@@ -9,6 +9,8 @@ import { FormSeanceComponent } from './seances/form-seance/form-seance.component
 import { ModifierSeanceComponent } from './seances/modifier-seance/modifier-seance.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exercices.component';
+import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
 import { EventComponent } from '../event/event.component';
 import { EventCreationComponent } from '../event/event-creation.component'
 
@@ -56,15 +58,32 @@ const routes: Routes = [
     canActivate: [guardGuard],
   },
   {
+    path: 'exercices',
+    component: DashboardExercicesComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'exercices/nouveau',
+    component: FormExerciceComponent,
+    canActivate: [guardGuard],
+  },
+  {
+    path: 'exercices/modifier/:id',
+    component: FormExerciceComponent,
+    canActivate: [guardGuard],
+  },  
+ {
     path: 'evenements',
     component: EventComponent,
     canActivate: [guardGuard],
   },
-  {
+
+ {
     path: 'evenements/creer',
     component: EventCreationComponent,
     canActivate: [guardGuard],
   },
+
 ];
 
 @NgModule({

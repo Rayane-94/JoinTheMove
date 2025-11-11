@@ -79,6 +79,28 @@
       "idUtilisateur": "9748",
       "exercice": null,
       "idCategorie": "4"
+    },
+    {
+      "id": "e7f7",
+      "label": "Séance pec",
+      "description": "",
+      "dateCreation": "2025-11-11T14:53:59.505Z",
+      "idUtilisateur": "9748",
+      "exercice": null,
+      "idCategorie": "1"
+    },
+    {
+      "id": "9c4b",
+      "label": "Testttdzdaz",
+      "description": "",
+      "dateCreation": "2025-11-11T15:05:15.833Z",
+      "idUtilisateur": "9748",
+      "exercice": [
+        "1762872752041",
+        "1762872781521",
+        "1762872826079"
+      ],
+      "idCategorie": "3"
     }
   ],
   "categories": [
@@ -218,6 +240,28 @@
       "tempsRealise": 90,
       "difficulte": "facile",
       "categorieLabel": "Yoga"
+    }
+  ],
+  "exercices": [
+    {
+      "id": "1762872752041",
+      "label": "DVC",
+      "description": "Développé couché",
+      "dateCreation": "2025-11-11T14:52:32.041Z",
+      "idUtilisateur": "9748",
+      "nombreSerie": 4,
+      "nombreRepetition": 8,
+      "tempsRepos": 90
+    },
+    {
+      "id": "1762872781521",
+      "label": "Burpees",
+      "description": "jknfzekfzekfz",
+      "dateCreation": "2025-11-11T14:53:01.521Z",
+      "idUtilisateur": "9748",
+      "nombreSerie": 3,
+      "nombreRepetition": 10,
+      "tempsRepos": 60
     }
   ]
 }

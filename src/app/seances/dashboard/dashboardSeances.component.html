@@ -10,13 +10,22 @@
           <h1 class="text-3xl font-bold text-gray-900">Mes Séances</h1>
           <p class="text-gray-600 mt-1">Gérez vos séances d'entraînement</p>
         </div>
-        <button
-          routerLink="/seances/nouvelle"
-          class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
-        >
-          <mat-icon class="mr-2">add</mat-icon>
-          Nouvelle Séance
-        </button>
+        <div class="flex space-x-3">
+          <button
+            routerLink="/exercices"
+            class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors shadow-sm"
+          >
+            <mat-icon class="mr-2">fitness_center</mat-icon>
+            Mes Exercices
+          </button>
+          <button
+            routerLink="/seances/nouvelle"
+            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+          >
+            <mat-icon class="mr-2">add</mat-icon>
+            Nouvelle Séance
+          </button>
+        </div>
       </div>
     </div>
 
@@ -47,20 +56,6 @@
           <div class="ml-4">
             <p class="text-sm font-medium text-gray-600">Total</p>
             <p class="text-2xl font-bold text-gray-900">{{ totalSeances }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-        <div class="flex items-center">
-          <div class="p-3 bg-green-100 rounded-lg flex">
-            <mat-icon class="text-green-600">schedule</mat-icon>
-          </div>
-          <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Cette semaine</p>
-            <p class="text-2xl font-bold text-gray-900">
-              {{ totalSeances }} - todo à changer
-            </p>
           </div>
         </div>
       </div>
@@ -127,9 +122,7 @@
               </div>
 
               <!-- Actions -->
-              <div
-                class="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity"
-              >
+              <div class="flex items-center space-x-2">
                 <button
                   mat-icon-button
                   class="!text-gray-400 hover:!text-green-600 hover:!bg-green-50 transition-colors"
@@ -137,6 +130,14 @@
                   title="Marquer comme réalisée"
                 >
                   <mat-icon>check_circle_outline</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  class="!text-gray-400 hover:!text-purple-600 hover:!bg-purple-50 transition-colors"
+                  (click)="voirDetailsSeance(seance)"
+                  title="Voir les détails"
+                >
+                  <mat-icon>visibility</mat-icon>
                 </button>
                 <button
                   mat-icon-button

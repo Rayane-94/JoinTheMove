@@ -39,16 +39,17 @@
         </span>
       </div>
 
-      <div class="forgot-password">
-        <a href="#">Mot de passe oublié ?</a>
+      <div class="alert alert-error" *ngIf="errorMessage">
+        {{ errorMessage }}
       </div>
 
       <button 
         type="submit" 
         class="btn-submit"
-        [disabled]="loginForm.invalid"
+        [disabled]="loginForm.invalid || isLoading"
       >
-        Se connecter
+        <span *ngIf="!isLoading">Se connecter</span>
+        <span *ngIf="isLoading">⏳ Connexion...</span>
       </button>
 
       <p class="register-link">

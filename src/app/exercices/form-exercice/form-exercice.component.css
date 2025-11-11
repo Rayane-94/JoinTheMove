@@ -1,0 +1,71 @@
+/* Styles pour le formulaire d'exercice */
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 #0000);
+}
+
+/* Animation pour les inputs */
+input:focus,
+textarea:focus {
+  transform: translateY(-1px);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Style pour les inputs invalides */
+.border-red-500 {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2;
+}
+
+/* Amélioration du textarea */
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+/* Animation pour les boutons */
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Style pour la prévisualisation */
+.bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .px-8 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Animation pour le spinner de loading */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
