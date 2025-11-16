@@ -36,8 +36,8 @@ import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exe
 import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
 import { PopupDetailsSeanceComponent } from './shared/components/popup-details-seance/popup-details-seance.component';
 import { FormsModule } from '@angular/forms';
-import { EventComponent } from '../event/event.component';
-import { EventCreationComponent } from '../event/event-creation.component';
+import { EventComponent } from './event/event.component';
+import { EventCreationComponent } from './event/event-creation.component';
 
 @NgModule({
   declarations: [

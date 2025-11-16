@@ -11,8 +11,8 @@ import { HistoriqueComponent } from './historique/historique.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exercices.component';
 import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
-import { EventComponent } from '../event/event.component';
-import { EventCreationComponent } from '../event/event-creation.component'
+import { EventComponent } from './event/event.component';
+import { EventCreationComponent } from './event/event-creation.component'
 
 const routes: Routes = [
   {

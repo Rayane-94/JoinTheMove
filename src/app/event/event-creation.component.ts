@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventServiceService, Event } from '../app/shared/services/evenement/event-service.service';
-import { Categorie } from '../app/shared/services/categories/categories.service';
-import { Niveau } from '../app/shared/services/evenement/event-service.service';
+import { EventServiceService, Event } from '../shared/services/evenement/event-service.service';
+import { Categorie } from '../shared/services/categories/categories.service';
+import { Niveau } from '../shared/services/evenement/event-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,13 +17,16 @@ export class EventCreationComponent {
   
   newEvent: Partial<Event> = {
     categorie: '',
-    nombreMaxParticipants: 10,
+    nombreMaxParticipants: '',
     adress: '',
     date: '',
     niveau: 'Débutant',
     dateCreation: '',
     idUtilisateur: ''
   };
+
+  loading = false;
+  errorMsg = '';
 
   constructor(
     private eventService: EventServiceService, 
@@ -35,20 +38,29 @@ export class EventCreationComponent {
     }
 
   create() {
+    this.errorMsg = '';
     if (!this.newEvent.categorie || !this.newEvent.adress || !this.newEvent.date) return;
 
-     const payload: Omit<Event, 'id' | 'dateCreation'> = {
+    this.loading = true;
+    const payload: Omit<Event, 'id' | 'dateCreation'> = {
       categorie: this.newEvent.categorie!,
-      nombreMaxParticipants: this.newEvent.nombreMaxParticipants ?? 10,
+      nombreMaxParticipants: this.newEvent.nombreMaxParticipants ?? '',
       adress: this.newEvent.adress!,
       date: new Date(this.newEvent.date!).toISOString(),
       niveau: this.newEvent.niveau ?? 'Débutant',
       idUtilisateur: '1'
     };
 
-    this.eventService.createEvent(payload).subscribe((created) => {
-      // après création, retourner à la liste
-      this.router.navigate(['/evenements']);
+    this.eventService.createEvent(payload).subscribe({
+      next: (created) => {
+        console.log("state event creation =>", created)
+        this.loading = false;
+        this.router.navigate(['/evenements'], { state: { createdEvent: created }});
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMsg = err?.message || 'Erreur lors de la création.';
+      }
     });
   }
 }

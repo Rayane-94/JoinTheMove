@@ -134,7 +134,7 @@
     {
       "id": "ev-001",
       "categorie": "1",
-      "nombreMaxParticipant": 12,
+      "nombreMaxParticipants": "12",
       "adresse": "12 Rue du Sport, 75000 Paris",
       "date": "2025-11-20T18:30:00.000Z",
       "niveau": "intermediaire",
@@ -144,12 +144,23 @@
     {
       "id": "ev-002",
       "categorie": "3",
-      "nombreMaxParticipant": 25,
+      "nombreMaxParticipants": 5,
       "adresse": "Parc Monceau, Paris",
-      "date": "2025-11-22T09:00:00.000Z",
-      "niveau": "debutant",
+      "date": "2025-11-22T08:00:00.000Z",
+      "niveau": "Avancé",
       "dateCreation": "2025-11-10T18:30:00.000Z",
-      "idUtilisateur": "1"
+      "idUtilisateur": "1",
+      "adress": "Rue Saint-Rustique"
+    },
+    {
+      "id": "f7b5",
+      "categorie": "2",
+      "nombreMaxParticipants": 5,
+      "adress": "Villejuif Louis Aragon",
+      "date": "2025-11-23T09:18:00.000Z",
+      "niveau": "Avancé",
+      "idUtilisateur": "1",
+      "dateCreation": "2025-11-16T09:19:01.738Z"
     }
   ],
   "historique": [

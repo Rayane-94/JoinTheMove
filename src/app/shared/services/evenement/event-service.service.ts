@@ -6,7 +6,7 @@ export type Niveau = 'Débutant' | 'Intermédiaire' | 'Avancé';
 export interface Event {
   id: string;
   categorie: string;
-  nombreMaxParticipants: number;
+  nombreMaxParticipants: string;
   adress: string;
   date: string;
   niveau: Niveau;
@@ -20,7 +20,7 @@ export interface Event {
 
 
 export class EventServiceService {
-  private readonly baseUrl = 'http://localhost:3000/events';
+  private readonly baseUrl = 'http://localhost:3000/evenements';
   constructor(private http: HttpClient) {}
 
   getAllEvents(): Observable<Event[]>{
@@ -31,16 +31,22 @@ export class EventServiceService {
     return this.http.get<Event>(`${this.baseUrl}/${id}`);
   }
 
-  createEvent(event: Omit<Event, 'id' | 'dateCreation'>): Observable<Event> {
-    const body = {...event, dateCreation: new Date().toISOString()};
-    return this.http.post<Event>(this.baseUrl, event);
+  createEvent(payload: Omit<Event, 'id' | 'dateCreation'>): Observable<Event> {
+    const now = new Date().toISOString();
+
+    const body: Omit<Event, 'id'> = {
+      ...payload, 
+      dateCreation: now
+    };
+
+    return this.http.post<Event>(this.baseUrl, body);
   }
 
-   update(id: string, patch: Partial<Event>): Observable<Event> {
+   updateEvent(id: string, patch: Partial<Event>): Observable<Event> {
     return this.http.patch<Event>(`${this.baseUrl}/${id}`, patch);
   }
 
-  delete(id: string): Observable<void> {
+  deleteEvent(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
