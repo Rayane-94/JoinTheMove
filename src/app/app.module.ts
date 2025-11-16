@@ -35,6 +35,9 @@ import { ProfilComponent } from './profil/profil.component';
 import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exercices.component';
 import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
 import { PopupDetailsSeanceComponent } from './shared/components/popup-details-seance/popup-details-seance.component';
+import { FormsModule } from '@angular/forms';
+import { EventComponent } from './event/event.component';
+import { EventCreationComponent } from './event/event-creation.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { PopupDetailsSeanceComponent } from './shared/components/popup-details-s
     DashboardExercicesComponent,
     FormExerciceComponent,
     PopupDetailsSeanceComponent,
+    EventComponent,
+    EventCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ import { PopupDetailsSeanceComponent } from './shared/components/popup-details-s
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     AppRoutingModule,
+    FormsModule,
     // Angular Material Modules
     MatToolbarModule,
     MatCardModule,

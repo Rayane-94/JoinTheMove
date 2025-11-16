@@ -11,6 +11,9 @@ import { HistoriqueComponent } from './historique/historique.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardExercicesComponent } from './exercices/dashboard/dashboard-exercices.component';
 import { FormExerciceComponent } from './exercices/form-exercice/form-exercice.component';
+import { EventComponent } from './event/event.component';
+import { EventCreationComponent } from './event/event-creation.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -68,7 +71,19 @@ const routes: Routes = [
     path: 'exercices/modifier/:id',
     component: FormExerciceComponent,
     canActivate: [guardGuard],
+  },  
+ {
+    path: 'evenements',
+    component: EventComponent,
+    canActivate: [guardGuard],
   },
+
+ {
+    path: 'evenements/creer',
+    component: EventCreationComponent,
+    canActivate: [guardGuard],
+  },
+
 ];
 
 @NgModule({
